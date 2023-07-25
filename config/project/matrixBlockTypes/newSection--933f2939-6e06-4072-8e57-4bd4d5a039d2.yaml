@@ -1,0 +1,40 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  162737f2-4156-4bdd-bb79-476cc480b437:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 9d7e1723-af33-49e0-8978-eb429a7744d7 # Section Heading
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  9d7e1723-af33-49e0-8978-eb429a7744d7: # Section Heading
+    contentColumnType: text
+    fieldGroup: null
+    handle: sectionHeading
+    instructions: ''
+    name: 'Section Heading'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: newSection
+name: 'New Section'
+sortOrder: 1

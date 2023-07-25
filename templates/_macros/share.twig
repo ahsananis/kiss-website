@@ -1,0 +1,43 @@
+{% macro links(params) %}
+    {% set defaults = {
+        twitter: true,
+        facebook: true,
+        linkedin: true,
+        email: true,
+    } %}
+    {% set params = defaults|merge(params) %}
+
+    <ul>
+        {% if params.twitter and footerContent.twitterUrl %}
+            <li class="inline-block">
+                <a class="btn btn-yellow w-10 h-10 flex items-center justify-center mr-1 p-0" href="{{ 'https://twitter.com/intent/tweet?url=' ~ params.url|url_encode ~ '&text=' ~ params.message|url_encode ~ '&related=' ~ footerContent.twitterUrl }}" target="_blank" rel="noreferrer noopener">
+                    {% include "_includes/icons/twitter.svg" with { class: "w-4 h-4" } only %}
+                </a>
+            </li>
+        {% endif %}
+        
+        {% if params.facebook and footerContent.facebookUrl %}
+            <li class="inline-block">
+                <a class="btn btn-yellow w-10 h-10 flex items-center justify-center mr-1 p-0" href="{{ 'https://www.facebook.com/sharer/sharer.php?u=' ~ params.url|url_encode }}" target="_blank" rel="noreferrer noopener">
+                    {% include "_includes/icons/facebook.svg" with { class: "w-4 h-4" } only %}
+                </a>
+            </li>
+        {% endif %}
+        
+        {% if params.linkedin and footerContent.linkedinUrl %}
+            <li class="inline-block">
+                <a class="btn btn-yellow w-10 h-10 flex items-center justify-center mr-1 p-0" href="{{ 'https://www.linkedin.com/shareArticle?mini=true&url=' ~ params.url|url_encode ~ '&title=' ~ params.message|url_encode ~ '&summary=' ~ entry.shortDescription ~ '&source=' ~ footerContent.linkedinUrl }}" target="_blank" rel="noreferrer noopener">
+                    {% include "_includes/icons/linkedin.svg" with { class: "w-4 h-4" } only %}
+                </a>
+            </li>
+        {% endif %}
+
+        {% if params.email %}
+            <li class="inline-block">
+                <a class="btn btn-yellow w-10 h-10 flex items-center justify-center p-0" href="{{ 'mailto:?subject=' ~ params.message ~ '&body=' ~ params.url }}">
+                    {% include "_includes/icons/envelope.svg" with { class: "w-4 h-4" } only %}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endmacro %}

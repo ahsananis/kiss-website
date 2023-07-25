@@ -1,0 +1,221 @@
+field: f1c57532-9589-45a9-b178-22beaea089aa # Fields
+fieldLayouts:
+  9c4b0800-51d9-4cc8-8c54-c8572e439205:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 1a492280-17d4-486d-bbca-6d7f5436b2f9
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: efdd0d7a-f6e2-41ab-8ff3-1d680bcaa8c2 # Options
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9437ec44-c694-4c19-8fe9-13aa5584531c
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 672e66e7-4653-4ebe-85f7-75a903ee47e2
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 72b78042-3170-4a25-b741-1cb72020bd18
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  1a492280-17d4-486d-bbca-6d7f5436b2f9:
+    contentColumnType: text
+    fieldGroup: null
+    handle: label
+    instructions: ''
+    name: Label
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  672e66e7-4653-4ebe-85f7-75a903ee47e2:
+    contentColumnType: string
+    fieldGroup: null
+    handle: display
+    instructions: ''
+    name: Display
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Stacked
+            -
+              - value
+              - stacked
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Inline
+            -
+              - value
+              - inline
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  72b78042-3170-4a25-b741-1cb72020bd18:
+    contentColumnType: text
+    fieldGroup: null
+    handle: instructions
+    instructions: ''
+    name: Instructions
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9437ec44-c694-4c19-8fe9-13aa5584531c:
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: required
+    instructions: ''
+    name: Required
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  efdd0d7a-f6e2-41ab-8ff3-1d680bcaa8c2: # Options
+    contentColumnType: text
+    fieldGroup: null
+    handle: options
+    instructions: ''
+    name: Options
+    searchable: true
+    settings:
+      addRowLabel: 'Add an option'
+      columnType: text
+      columns:
+        __assoc__:
+          -
+            - col1
+            -
+              __assoc__:
+                -
+                  - heading
+                  - Label
+                -
+                  - handle
+                  - label
+                -
+                  - width
+                  - ''
+                -
+                  - type
+                  - singleline
+          -
+            - col2
+            -
+              __assoc__:
+                -
+                  - heading
+                  - Value
+                -
+                  - handle
+                  - value
+                -
+                  - width
+                  - ''
+                -
+                  - type
+                  - singleline
+          -
+            - col3
+            -
+              __assoc__:
+                -
+                  - heading
+                  - Selected
+                -
+                  - handle
+                  - selected
+                -
+                  - width
+                  - '50'
+                -
+                  - type
+                  - lightswitch
+      defaults:
+        -
+          __assoc__:
+            -
+              - col1
+              - ''
+            -
+              - col2
+              - ''
+            -
+              - col3
+              - ''
+      maxRows: ''
+      minRows: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Table
+handle: radio
+name: Radio
+sortOrder: 5

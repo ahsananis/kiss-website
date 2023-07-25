@@ -1,0 +1,39 @@
+{% set number = craft.app.request.getParam('number') %}
+{% set order = craft.enupalStripe.getOrderByNumber(number) %}
+{% set paymentForm = order.getPaymentForm() %}
+{% set paymentFormHandlePrefix = craft.app.config.general.products.paymentFormHandlePrefix %}
+
+{% if not order or not (paymentForm.handle starts with paymentFormHandlePrefix) %}
+    {% exit 404 %}
+{% endif %}
+
+{% extends "_layouts/site" %}
+{% import "_macros/share" as share %}
+{% set seo = craft.seo.custom('Order Confirmation') %}
+{% set product = craft.entries.section('products').id(paymentForm.handle|replace({ (paymentFormHandlePrefix): '' })).one() %}
+
+{% block main %}
+
+    <div class="container">
+        {# @todo: DRY - super close to _includes/heading #}
+        <div class="section max-w-lg mx-auto">
+            <h1 class="mb-4 font-marujo-sans font-normal uppercase text-3xl md:text-5xl sm:text-center">Thank you for your order</h1>
+
+            <div class="mb-12 wysiwyg">
+                {{ shop.orderCompleteMessage }}
+            </div>
+
+            {% if product %}
+                <h2 class="mb-2 text-2xl font-semibold font-marujo-fino-sans tracking-wide">Tell others what you’ve ordered</h2>
+                <p class="mb-4">Why not spread the word about your purchase and encourage your friends to shop with us as well.</p>
+
+                {% set entry = craft.entries.section('shopIndex').one() %}
+                {{ share.links({
+                    message: 'I’ve just purchased a ' ~ product.title ~ '. Get yours here:',
+                    url: entry.url,
+                }) }}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

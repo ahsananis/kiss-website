@@ -1,0 +1,200 @@
+dateModified: 1616347737
+email:
+  fromEmail: $MAIL_FROM_ADDRESS
+  fromName: $MAIL_FROM_NAME
+  template: ''
+  transportSettings:
+    encryptionMethod: tls
+    host: $MAIL_HOST
+    password: $MAIL_PASSWORD
+    port: $MAIL_PORT
+    timeout: '5'
+    useAuthentication: '1'
+    username: $MAIL_USERNAME
+  transportType: craft\mail\transportadapters\Smtp
+plugins:
+  contact-form:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+    settings:
+      allowAttachments: ''
+      prependSender: 'On behalf of'
+      prependSubject: 'New message from Kiddies Support Scheme'
+      successFlashMessage: 'Your message has been sent.'
+      toEmail: kiss@kiddiessupportscheme.org
+  cookie-consent-banner:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.1
+    settings:
+      allow: 'Allow cookies'
+      async_js: ''
+      auto_inject: '1'
+      decline: Decline
+      defer_js: ''
+      disable_in_live_preview: '1'
+      dismiss: 'Got it!'
+      dismiss_on_scroll: '0'
+      dismiss_on_timeout: '0'
+      excluded_categories: null
+      excluded_entry_types: null
+      expiry_days: '365'
+      honour_do_not_track_header: ''
+      layout: classic
+      learn: 'Learn More'
+      learn_more_link: 'http://cookiesandyou.com/'
+      message: 'This website uses cookies to ensure you get the best experience on our website.'
+      palette: default
+      palette_banner: '#ffdd0e'
+      palette_banner_text: '#222'
+      palette_button: '#fff'
+      palette_button_text: '#222'
+      palette_left_button_bg: '#f8e71c'
+      palette_left_button_text: '#000000'
+      palette_link: '#222'
+      position: toppush
+      preload_css: ''
+      revokable: ''
+      secure_only: ''
+      target: _blank
+      type: info
+  enupal-stripe:
+    edition: standard
+    enabled: true
+    licenseKey: V71X04B4I204OTO6YN71EIRY
+    schemaVersion: 3.2.1
+    settings:
+      adminNotificationRecipients: kiss@kiddiessupportscheme.org
+      adminNotificationReplyToEmail: kiss@kiddiessupportscheme.org
+      adminNotificationSenderEmail: kiss@kiddiessupportscheme.org
+      adminNotificationSenderName: 'Kiddies Support Scheme'
+      adminNotificationSubject: 'Payment Received: {{ order.number }} - {{ order.getPaymentForm().name }}'
+      adminNotificationTemplate: null
+      adminTemplateOverride: ''
+      cancelAtPeriodEnd: false
+      capture: '1'
+      chargeDescription: 'Order from {email}'
+      chargeType: null
+      currentUserEmail: ''
+      customerNotificationReplyToEmail: kiss@kiddiessupportscheme.org
+      customerNotificationSenderEmail: kiss@kiddiessupportscheme.org
+      customerNotificationSenderName: 'Kiddies Support Scheme'
+      customerNotificationSubject: '{{ order.getPaymentForm().handle in [''oneTimeDonation'', ''monthlyDonation'', ''sponsorAChild''] ? ''Thank you for your donation!'' : ''Thank you for your order!'' }}'
+      customerNotificationTemplate: null
+      customerTemplateOverride: _stripe_payments/emails/customer
+      defaultCurrency: GBP
+      displayTaxLabel: 0
+      enableAdminNotification: '1'
+      enableConnect: 0
+      enableCustomerNotification: '1'
+      enableTaxes: 0
+      enableVendorNotification: 0
+      globalRate: 1
+      liveClientId: null
+      livePublishableKey: pk_live_nbPY77FpRZj9j92Fehz0EpEm
+      liveSecretKey: sk_live_a8hDo0BMcb8zHiH0KnS5wiyS
+      loadCss: 1
+      loadJquery: '1'
+      oneTimeSetupFeeLabel: 'One time set-up fee'
+      plansWithNickname: '1'
+      returnUrl: ''
+      syncDefaultFormId: null
+      syncDefaultStatusId: null
+      syncEnabledDateRange: false
+      syncEndDate: null
+      syncIfUserExists: false
+      syncLimit: 500
+      syncStartDate: null
+      syncType: 1
+      tax: null
+      taxType: 0
+      testClientId: null
+      testMode: ''
+      testPublishableKey: pk_test_lgH9UMUueJ1dHGJE5smoYMtn
+      testSecretKey: sk_test_cMB5UiUu3VVGk5Zvjj1JGmH1
+      updateCustomerEmailOnStripe: 0
+      useSca: ''
+      vendorNameFormat: null
+      vendorNotificationReplyToEmail: null
+      vendorNotificationSenderEmail: null
+      vendorNotificationSenderName: null
+      vendorNotificationSubject: null
+      vendorNotificationTemplate: null
+      vendorPaymentType: manually
+      vendorSkipAdminReview: 0
+      vendorTemplateOverride: null
+      vendorUserFieldId: null
+      vendorUserGroupId: null
+  mailchimp-subscribe:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+  mix:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  pic-puller:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.5
+    settings:
+      sharedoauth: '1'
+      sharedoauthuser: '190'
+      shortName: 'Pic Puller'
+  position-fieldtype:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+  redactor-clips:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  seo:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.1.1
+    settings:
+      description: ''
+      facebookAppId: ''
+      metaTemplate: _includes/meta.twig
+      robots:
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+      robotsTxt: "{# Sitemap URL #}\r\nSitemap: {{ url(seo.sitemapName ~ '.xml') }}\r\n\r\n{# Disallows #}\r\n{% if craft.app.config.env != 'production' %}\r\n\r\n{# Disallow access to everything when NOT in production #}\r\nUser-agent: *\r\nDisallow: /\r\n\r\n{% else %}\r\n\r\n{# Disallow access to cpresources/ when live #}\r\nUser-agent: *\r\nDisallow: /cpresources/\r\n\r\n{% endif %}"
+      sitemapLimit: '1000'
+      sitemapName: sitemap
+      socialImage: ''
+      title:
+        -
+          key: '1'
+          locked: '0'
+          template: '{title}'
+        -
+          key: '2'
+          locked: '1'
+          template: ' - {{ siteName }}'
+      titleSuffix: null
+      twitterHandle: KISS_Charity
+  video-embedder:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  wordsmith:
+    edition: standard
+    enabled: true
+    schemaVersion: 0.0.0.0
+system:
+  edition: pro
+  live: true
+  name: 'Kiddies Support Scheme'
+  schemaVersion: 3.6.6
+  timeZone: Europe/London

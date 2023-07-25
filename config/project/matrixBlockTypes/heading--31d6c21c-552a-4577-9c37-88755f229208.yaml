@@ -1,0 +1,40 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  42983036-33a6-47a1-b8f0-af6cfa9ad0f2:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 51a28afb-7d22-4037-a7e7-9cde96f81f23 # Heading
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  51a28afb-7d22-4037-a7e7-9cde96f81f23: # Heading
+    contentColumnType: text
+    fieldGroup: null
+    handle: heading
+    instructions: ''
+    name: Heading
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: heading
+name: Heading
+sortOrder: 2

@@ -1,0 +1,17 @@
+{% extends "_layouts/donate" %}
+{% set seo = craft.seo.custom('Sponsor The Community') %}
+
+{# @todo: Get from product? #}
+{% block heading %}Sponsor The Community{% endblock %}
+
+{% block subheading %}
+    <p>KiSS helps children access education; it equips them with the skills and knowledge to enable them to build a better future for themselves, their families and their communities.</p>
+    <p>For as little as £6 a month you can sponsor the KiSS Community and support the overall development of a vibrant and cohesive community that encourages ambition and success. More crucially, this community has been a support group for many during the Covid-19 pandemic this year.</p>
+    <p>Monthly support of £6, £10 or £15 equates to 20p, 32p or 48p a day – a little can go a long way!</p>
+{% endblock %}
+
+{% block form %}
+    {{ craft.enupalStripe.paymentForm('sponsorTheCommunity', {
+        loadAssets: false,
+    }) }}
+{% endblock %}

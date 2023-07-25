@@ -1,0 +1,60 @@
+fieldLayouts:
+  17662429-7e1a-41f3-9526-ea1f8b1ba9af:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: 56c79704-f32e-426b-b557-8d4803fd785e # Body
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 6c52d467-6d5f-4a02-9b81-896972fe9294 # SEO
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: SEO
+        sortOrder: 2
+handle: newsAndEventsIndex
+hasTitleField: false
+name: 'News & Events Index'
+section: a2b9d81e-e4fd-44c7-99f8-31a419d6cfd4
+sortOrder: 1
+titleFormat: 'News & Events'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

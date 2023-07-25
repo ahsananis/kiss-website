@@ -1,0 +1,127 @@
+{% extends "_layouts/site" %}
+
+{% block main %}
+    <div class="section container max-w-md sm:text-center">
+        <div class="mb-4">
+            <h1 class="font-marujo-sans font-normal uppercase text-3xl md:text-5xl">{{ entry.heading }}</h1>
+            {% if entry.subheading %}
+                <h2 class="font-marujo-sans font-normal uppercase text-2xl md:text-4xl">{{ entry.subheading }}</h2>
+            {% endif %}
+        </div>
+
+        <div class="mb-8 text-lg text-grey-80">
+            {{ entry.body }}
+        </div>
+
+        {% set ourMissionEntry = craft.entries.id(260).one() %}
+        {% set howToHelpEntry = craft.entries.id(312).one() %}
+
+        {% if ourMissionEntry or ourMissionEntry %}
+            <div class="-mb-4">
+                <a href="{{ ourMissionEntry.url }}" class="btn btn-lg btn-yellow mr-4 mb-4">More about what we do</a>
+                <a href="{{ howToHelpEntry.url }}" class="btn btn-lg border-2 border-yellow mb-4">How to help</a>
+            </div>
+        {% endif %}
+    </div>
+
+    {% set heroMedia = entry.heroMedia.one() %}
+    {% if heroMedia %}
+        <div class="section">
+             <div class="w-full sm:max-w-3xl sm:mx-auto">
+                {% switch heroMedia.type %}
+                
+                    {% case "image" %}
+                        {% set image = heroMedia.image.one() %}
+                        <img src="{{ image.url }}" alt="{{ image.title }}">
+                
+                    {% case "video" %}
+                        {% set fullHd = heroMedia.video.all() %}
+                        {% set hd = heroMedia.hd.all() %}
+                        {% set sd = heroMedia.sd.all() %}
+                        {% set poster = heroMedia.posterImage.one() %}
+                        <video {% if poster %}poster="{{ poster.url }}"{% endif %} controls data-player data-player-config='{ "ratio": "{{ craft.app.config.general.plyrAspectRatios[heroMedia.aspectRatio.value] ?? '16:9' }}" }'>
+                            {% for video in fullHd %}
+                                <source src="{{ video.url }}" type="{{ video.mimeType }}" size="1080">
+                            {% endfor %}
+
+                            {% for video in hd %}
+                                <source src="{{ video.url }}" type="{{ video.mimeType }}" size="720">
+                            {% endfor %}
+
+                            {% for video in sd %}
+                                <source src="{{ video.url }}" type="{{ video.mimeType }}" size="576">
+                            {% endfor %}
+                        </video>
+
+                {% endswitch %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="section">
+            <div class="row justify-center -mb-6 sm:-mb-10">
+                {% for entry in entry.featuredContent.all() %}
+                    {% set featuredImage = entry.featuredImage.one() %}
+
+                    <div class="col flex sm:w-1/2 xl:w-1/3 max-w-xs">
+                        <div class="card card-faux-link mb-6 sm:mb-10">
+                            <img class="card-img-top" src="{{ featuredImage.getUrl({ width: 300, height: 188 }) }}" alt="{{ entry.title }}">
+
+                            <div class="card-body flex flex-col flex-1">
+                                <h3 class="card-title">{{ entry.title }}</h3>
+                                
+                                <div class="mb-auto text-grey-60">
+                                    {{ entry.shortDescription }}
+                                </div>
+
+                                <div>
+                                    <a href="{{ entry.url }}" class="mt-8 btn btn-yellow">Find out more</a>
+                                </div>
+                            </div>
+
+                            <a href="{{ entry.url }}" class="card-faux-link-overlay" tabindex="-1">{{ entry.title }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% include "_includes/blocks/donation_form" with { class: 'section' } %}
+
+        {% cache for 15 minutes %}
+            {% set instagramUser = craft.picPuller.user({'use_stale_cache': true, 'user_id': craft.app.config.general.picPullerUserId })[0] %}
+
+            {% if instagramUser and instagramUser.status == true %}
+            <div class="mb-8 sm:text-center">
+                    <h4 class="text-3xl font-normal font-marujo-fino-sans">
+                        <a href="https://www.instagram.com/{{ instagramUser.username }}" target="_blank" rel="noreferrer noopener">
+                            <img class="w-12 h-12" src="{{ url('assets/img/instagram-logo.png') }}" srcset="{{ url('assets/img/instagram-logo@2x.png') }} 2x">
+                            Follow us @{{ instagramUser.username }}
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="row -mx-2 -mb-4">
+                    {% for instagramdata in craft.picPuller.media_recent({'use_stale_cache': true, 'user_id': craft.app.config.general.picPullerUserId, 'limit': 4}) %}
+                        {% if instagramdata.status == true %}
+                            <div class="col w-1/2 md:w-1/4 px-2">
+                                <a class="relative block mb-4 rounded overflow-hidden transition-shadow hover:shadow-hover aspect-ratio-square" href="{{ instagramdata.link }}" target="_blank" rel="noreferrer noopener">
+                                    {% if instagramdata.video_low_resolution != '' %}
+                                        <video class="absolute pin w-full h-full object-cover" src="{{ instagramdata.video_low_resolution }}" playsinline muted loop autoplay></video>
+                                    {% else %}
+                                        <img class="absolute pin w-full h-full object-cover" src="{{ instagramdata.low_resolution }}" srcset="{{ instagramdata.standard_resolution }} 2x">
+                                    {% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endcache %}
+{% endblock %}
+
+{% block modals %}
+    {% include "_includes/mailing_list_popup" %}
+{% endblock %}

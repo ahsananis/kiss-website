@@ -1,0 +1,49 @@
+{% extends "_layouts/site" %}
+{% import "_macros/share" as share %}
+
+{% block main %}
+    <article>
+        {% include "_includes/heading" %}
+        {% include "_includes/article_body" %}
+    </article>
+
+    {% set params = craft.entries.section('news').type('article') %}
+    {% set prevEntry = entry.getPrev(params.orderBy('postDate desc')) ?? params.orderBy('postDate asc').one() %}
+    {% set nextEntry = entry.getNext(params.orderBy('postDate desc')) ?? params.orderBy('postDate desc').one() %}
+    <div class="container flex flex-wrap justify-between py-12">
+        <div class="w-full xl:w-auto mb-12 text-center">
+            <h4 class="mb-2 text-base font-normal">Share</h4>
+
+            {{ share.links({
+                message: entry.title,
+                url: entry.url,
+            }) }}
+        </div>
+
+        <div class="xl:order-first group w-full lg:w-auto mb-12">
+            <a class="pagination-link pagination-link-left" href="{{ prevEntry.url }}">
+                <svg class="mr-8 h-16 w-6 text-grey-40 group-hover:text-grey-60 transition transition-color" fill="none" viewBox="0 0 31.344 105.69" stroke="currentColor" stroke-width="3px" fill-rule="evenodd" width="100%" height="100%"><path d="M29.844 2.86l-25 50 25 50"></path></svg>
+
+                <div class="min-w-0">
+                    <h4 class="mb-1 text-base font-normal truncate">{{ prevEntry.title }}</h4>
+                    <div class="text-sm text-grey-60 hover:text-grey-80">
+                        {{ prevEntry.shortDescription|chop(limit=100, unit='c', append='…', allowedTags='<strong><em>') }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="xl:order-last group w-full lg:w-auto mb-12 text-right">
+            <a class="pagination-link pagination-link-right" href="{{ nextEntry.url }}">
+                <div class="min-w-0">
+                    <h4 class="mb-1 text-base font-normal truncate">{{ nextEntry.title }}</h4>
+                    <div class="text-sm text-grey-60 hover:text-grey-80">
+                        {{ nextEntry.shortDescription|chop(limit=100, unit='c', append='…', allowedTags='<strong><em>') }}
+                    </div>
+                </div>
+
+                <svg class="ml-8 h-16 w-6 text-grey-40 group-hover:text-grey-60 transition transition-color" fill="none" viewBox="0 0 31.344 105.69" stroke="currentColor" stroke-width="3px" fill-rule="evenodd" width="100%" height="100%"><path d="M4.19 1.51l25 50-25 50"></path></svg>
+            </a>
+        </div>
+    </div>
+{% endblock %}

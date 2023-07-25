@@ -1,0 +1,64 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  94218927-cbc9-45a3-aff8-bdd433b1dce2:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: b6e65069-7b37-4797-b18c-386024bcdf3a # Label
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 885936dc-a236-4ac1-97bf-526743f6b55c # URL
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  885936dc-a236-4ac1-97bf-526743f6b55c: # URL
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: linkUrl
+    instructions: ''
+    name: URL
+    searchable: false
+    settings:
+      maxLength: '255'
+      placeholder: null
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+  b6e65069-7b37-4797-b18c-386024bcdf3a: # Label
+    contentColumnType: text
+    fieldGroup: null
+    handle: label
+    instructions: ''
+    name: Label
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: callToAction
+name: 'Call To Action'
+sortOrder: 13

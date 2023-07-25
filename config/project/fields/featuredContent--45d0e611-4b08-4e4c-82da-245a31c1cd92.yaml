@@ -1,0 +1,22 @@
+contentColumnType: string
+fieldGroup: 0be9b4b2-d728-4c0d-8b83-6eb5f68988a7 # Homepage
+handle: featuredContent
+instructions: ''
+name: 'Featured Content'
+searchable: true
+settings:
+  allowSelfRelations: false
+  limit: '6'
+  localizeRelations: false
+  selectionLabel: ''
+  showSiteMenu: true
+  source: null
+  sources:
+    - 'section:6083830d-a37d-4f5a-af14-a6d47a86770f'
+    - 'section:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries

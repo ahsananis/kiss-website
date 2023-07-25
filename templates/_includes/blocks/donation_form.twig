@@ -1,0 +1,68 @@
+<div class="{{ class ?? '' }} p-6 md:p-12 bg-yellow-lightest rounded-lg shadow-3xl">
+    <div class="wysiwyg mb-8">
+        {% if message is defined and message %}{{ message }}{% else %}{{ donationWidget.donationMessage }}{% endif %}
+    </div>
+
+    <div data-vue="donation-form">
+        <donation-form inline-template :templates="{{ craft.app.config.general.donationTemplates|json_encode }}">
+            <form>
+                <fieldset class="mb-4">
+                    <div class="row items-center">
+                        <legend class="col mb-1 md:mb-0" style="width: 10rem;">{{ 'I want to make a'|t }}</legend>
+
+                        <div class="col md:w-auto">
+                            <div class="custom-radio mb-2 md:mb-0">
+                                <input type="radio" value="monthly" v-model="type" id="monthly-donation">
+                                <label for="monthly-donation">{{ 'Monthly donation'|t }}</label>
+                            </div>
+
+                            <div class="custom-radio">
+                                <input type="radio" value="single" v-model="type" id="single-donation">
+                                <label for="single-donation">{{ 'Single donation'|t }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="md:mb-4">
+                    <div class="row items-center">
+                        <legend class="col mb-1 md:mb-0" style="width: 10rem;">{{ 'I want to give'|t }}</legend>
+
+                        <div class="col md:w-auto">
+                            <div class="row">
+                                <div class="col md:w-auto">
+                                    <div class="mb-4 md:mb-0">
+                                        <div v-for="template in templates">
+                                            <div v-if="template.type === type">
+                                                <div v-for="value in template.values" class="custom-radio">
+                                                    <input type="radio" :value="value" v-model="amount" :id="'donate-' + value">
+                                                    <label :for="'donate-' + value" style="min-width: 5rem;">{% verbatim %}&pound;{{ value }}{% endverbatim %}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col md:w-auto">
+                                    <div class="mb-4 md:mb-0">
+                                        <div class="md:flex md:items-center">
+                                            <label class="block mb-1 md:mr-4 md:mb-0">{{ 'Other amount'|t }}</label>
+                                            <div class="flex px-4 py-2 bg-white border-2 border-yellow rounded-full">
+                                                <span class="mr-1">&pound;</span>
+                                                <currency-input class="appearance-none w-full focus:outline-none" v-model="amount">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div>
+                    <button @click="donate" class="btn btn-yellow" type="button">{{ 'Donate'|t }}</button>
+                </div>
+            </form>
+        </donation-form>
+    </div>
+</div>

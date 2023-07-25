@@ -1,0 +1,18 @@
+contentColumnType: text
+fieldGroup: 9a1e772e-4c45-4b9d-b536-a230076feb3e # Forms
+handle: toEmail
+instructions: 'The email form submissions should go to. The system email will be used if blank.'
+name: 'To Email'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

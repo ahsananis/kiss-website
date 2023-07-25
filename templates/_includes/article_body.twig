@@ -1,0 +1,214 @@
+{% macro getPosition(block) %}
+    {%- spaceless %}
+        {% set positionedTypes = ['text', 'pullQuote', 'image', 'quote', 'video'] %}
+        {% set wideTypes = ['image', 'video'] %}
+
+        {% if block.type.handle in positionedTypes and block.position %}
+            {% if block.type.handle in wideTypes and block.position == 'full' %}
+                wide
+            {% else %}
+                {{ block.position }}
+            {% endif %}
+        {% else %}
+            {% if block.type.handle in ['donationForm', 'mailingListForm'] %}
+                wide
+            {% else %}
+                center
+            {% endif %}
+        {% endif %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% from _self import getPosition %}
+
+{% set prevType = null %}
+{% set prevPosition = null %}
+{% set nextType = null %}
+{% set nextPosition = null %}
+{% set closedLastRow = true %}
+{% set blocks = entry.articleBody %}
+
+{% for i, block in blocks.all() %}
+
+    {% set type = (nextType ?: block.type.handle) %}
+    {% set position = (nextPosition ?: getPosition(block)~'') %}
+
+    {% set nextType = (not loop.last ? blocks[i+1].type.handle) %}
+    {% set nextPosition = (not loop.last ? getPosition(blocks[i+1])~'') %}
+
+    {# Is this block floated to the left or right? #}
+    {% set isFloat = position in ['left', 'right'] %}
+
+    {# Is this a breakout block (a sole floated block before a centered block)? #}
+    {% set isBreakout = (
+        isFloat and
+        type in ['pullQuote', 'image'] and
+        (position == 'left' or prevPosition != 'left') and
+        nextPosition == 'center'
+    ) %}
+
+    {# Are we starting a new row? #}
+    {% if position == 'full' %}
+        <div class="container lg:clearfix w-full max-w-full my-8 px-0">
+    {% elseif position == 'wide' %}
+        <div class="container lg:clearfix max-w-2xl my-8">
+    {% elseif closedLastRow %}
+        <div class="container lg:clearfix max-w-xl my-8">
+        {% if type not in ['gallery', 'quote'] %}
+            <div class="lg:float-left
+            {%- if (type == 'image' and position == 'center') %} lg:w-2/3 lg:ml-1/6
+            {%- else %} lg:ml-1/12 lg:w-5/6{% endif -%}
+            ">
+        {% endif %}
+    {% endif %}
+
+    {% if isFloat %}
+        <div class="lg:w-1/2 lg:px-5
+        {%- if position == 'left' %} lg:float-left lg:pl-0{% else %} lg:float-right lg:pr-0{% endif -%}
+        {%- if isBreakout %} breakout{% endif %}
+        ">
+    {% endif %}
+
+    {% switch type %}
+        {% case 'newSection' %}
+            <h2 class="font-marujo-sans font-normal text-4xl text-center uppercase">{{ block.sectionHeading }}</h2>
+
+        {% case 'heading' %}
+            <h3 class="font-marujo-sans font-normal text-2xl text-center uppercase">{{ block.heading }}</h3>
+        
+        {% case 'text' %}
+            {{ block.text }}
+
+        {% case 'pullQuote' %}
+            <blockquote class="pullquote">
+                <p class="px-3 py-16 text-xl text-center border-t-3 border-b-3 border-grey-100">{{ block.pullQuote }}</p>
+            </blockquote>
+
+        {% case 'image' %}
+            {% set image = block.image.one() %}
+            {% if image %}
+                {#
+                {% if position == 'full' %}
+                    {% do image.setTransform({ width: 1440, height: 480 }) %}
+                {% elseif position == 'center' %}
+                    {% do image.setTransform({ width: 600 }) %}
+                {% elseif isBreakout %}
+                    {% do image.setTransform({ width: 460 }) %}
+                {% else %}
+                    {% do image.setTransform({ width: 360 }) %}
+                {% endif %}
+                #}
+
+                <figure{% if not block.caption %} class="mb-6"{% endif %}>
+                    <img class="block w-full h-auto" src="{{ image.url }}" alt="{{ image.title }}">
+                    {% if block.caption %}
+                        <figcaption class="mt-2 text-sm text-center text-grey-60">
+                            {{ block.caption }}
+                        </figcaption>
+                    {% endif %}
+                </figure>
+            {% endif %}
+
+        {% case 'gallery' %}
+            <div class="flex flex-wrap -mx-2">
+                {% for image in block.images.all() %}
+                    <div class="md:flex-1 mb-6 px-2">
+                        <img class="block w-full h-auto" src="{{ image.url }}" alt="{{ image.title }}">
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% case 'quote' %}
+            <blockquote class="my-8 py-8 lg:py-16 text-center {% if position == 'full' %}hero{% else %}border-t-3 border-b-3 border-grey-100{% endif %}">
+                <div class="container max-w-xl my-8">
+                    <p class="text-4xl">“{{ block.quote }}”</p>
+
+                    {% if block.attribution %}
+                        <footer class="mt-4">– <cite>{{ block.attribution }}</cite></footer>
+                    {% endif %}
+                </div>
+            </blockquote>
+
+        {% case 'video' %}
+            {% set embed = craft.videoEmbedder.getEmbedUrl(block.videoUrl, { origin: siteUrl }) %}
+            {% if embed|length %}
+                <div class="mb-6">
+                    <div data-player data-player-config='{ "ratio": "{{ craft.app.config.general.plyrAspectRatios[block.aspectRatio.value] ?? '16:9' }}" }'>
+                        <iframe src="{{ embed }}"></iframe>
+                    </div>
+                </div>
+            {% endif %}
+
+        {% case 'donationForm' %}
+            {% include "_includes/blocks/donation_form" with { class: 'text-base mb-6', message: block.message } only %}
+
+        {% case 'mailingListForm' %}
+            {% include "_includes/blocks/mailing_list_form" with { class: 'text-base mb-6', message: block.message } only %}
+
+        {% case 'socialLinks' %}
+            <div class="sm:text-center">
+                <h4 class="mb-4 text-2xl font-semibold font-marujo-fino-sans leading-tight tracking-wide">Follow us</h4>
+
+                <p>
+                    {% if block.platforms.contains('facebook') and footerContent.facebookUrl %}
+                        <a href="{{ footerContent.facebookUrl }}" target="_blank" rel="noreferrer noopener" class="btn btn-yellow w-12 sm:w-16 h-12 sm:h-16 inline-flex items-center justify-center mx-1 sm:mx-2 p-0">
+                            {% include "_includes/icons/facebook.svg" with { class: "w-4 h-4 sm:w-6 sm:h-6" } only %}
+                        </a>
+                    {% endif %}
+
+                    {% if block.platforms.contains('instagram') and footerContent.instagramUrl %}
+                        <a href="{{ footerContent.instagramUrl }}" target="_blank" rel="noreferrer noopener" class="btn btn-yellow w-12 sm:w-16 h-12 sm:h-16 inline-flex items-center justify-center mx-1 sm:mx-2 p-0">
+                            {% include "_includes/icons/instagram.svg" with { class: "w-4 h-4 sm:w-6 sm:h-6" } only %}
+                        </a>
+                    {% endif %}
+
+                    {% if block.platforms.contains('twitter') and footerContent.twitterUrl %}
+                        <a href="{{ footerContent.twitterUrl }}" target="_blank" rel="noreferrer noopener" class="btn btn-yellow w-12 sm:w-16 h-12 sm:h-16 inline-flex items-center justify-center mx-1 sm:mx-2 p-0">
+                            {% include "_includes/icons/twitter.svg" with { class: "w-4 h-4 sm:w-6 sm:h-6" } only %}
+                        </a>
+                    {% endif %}
+
+                    {% if block.platforms.contains('linkedin') and footerContent.linkedinUrl %}
+                        <a href="{{ footerContent.linkedinUrl }}" target="_blank" rel="noreferrer noopener" class="btn btn-yellow w-16 h-16 inline-flex items-center justify-center mx-2 p-0">
+                            {% include "_includes/icons/linkedin.svg" with { class: "w-6 h-6" } only %}
+                        </a>
+                    {% endif %}
+                </p>
+            </div>
+
+        {% case "formEmbed" %}
+            {% set formEmbed = block.form.one() %}
+            {% if formEmbed %}
+                <div class="text-base p-6 md:p-8 rounded-lg shadow-3xl border border-grey-20">
+                    {% include 'forms/_form' with { form: formEmbed } %}
+                </div>
+            {% endif %}
+
+        {% case "callToAction" %}
+            <div class="my-16 sm:text-center">
+                <a class="btn btn-lg btn-yellow" href="{{ block.linkUrl }}">{{ block.label }}</a>
+            </div>
+
+    {% endswitch %}
+
+    {% if isFloat %}
+        </div>
+    {% endif %}
+
+    {# Are we closing this row? #}
+    {% if not (
+        (position == 'left' and nextPosition == 'right') or
+        isBreakout
+    ) %}
+        {% if position not in ['full', 'wide'] and type not in ['gallery', 'quote'] %}
+            </div>
+        {% endif %}
+        </div>
+        {% set closedLastRow = true %}
+    {% else %}
+        {% set closedLastRow = false %}
+    {% endif %}
+    
+    {% set prevType = type %}
+    {% set prevPosition = position %}
+{% endfor %}

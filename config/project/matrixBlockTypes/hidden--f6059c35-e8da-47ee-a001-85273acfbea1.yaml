@@ -1,0 +1,68 @@
+field: f1c57532-9589-45a9-b178-22beaea089aa # Fields
+fieldLayouts:
+  1b992ecc-33d5-4757-a121-9300a7db078f:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: d080ee56-647d-427a-8158-072ce045d0fb # Label
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 00408f05-0814-4644-8aa3-c8452a8ed8b4
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  00408f05-0814-4644-8aa3-c8452a8ed8b4:
+    contentColumnType: text
+    fieldGroup: null
+    handle: hiddenValue
+    instructions: ''
+    name: Value
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  d080ee56-647d-427a-8158-072ce045d0fb: # Label
+    contentColumnType: text
+    fieldGroup: null
+    handle: label
+    instructions: ''
+    name: Label
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: hidden
+name: Hidden
+sortOrder: 6

@@ -1,0 +1,72 @@
+fieldLayouts:
+  21a8456a-ad80-4bae-b869-11a3c0ea1a06:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: fa66775e-639c-4b23-97c5-f73b928b1b89 # Mailing List Confirmation Message
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: ef6b3005-a45e-4328-a545-d1bf12b1a6cb # Instagram URL
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cac26848-67a2-4582-bfd7-a84d34ebda71 # Twitter URL
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 601d10a6-72c2-4e35-a940-24ffaccf36c6 # Facebook URL
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: b4626701-76b9-44b7-b095-14b8c3fa43ea # LinkedIn Url
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 2909b2cd-abf7-4edb-9333-a4d88ca4ca9e # Copyright Notice
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8c31a73a-1913-4942-a4af-d1e3d6c14210 # Registered Charity Notice
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: footerContent
+name: 'Footer Content'

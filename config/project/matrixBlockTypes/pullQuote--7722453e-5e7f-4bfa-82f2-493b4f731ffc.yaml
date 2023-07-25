@@ -1,0 +1,81 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  1d04daea-d492-4d2e-ab98-495f2536cd2f:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: c78b71a4-edb3-41d9-96cc-b9c5b55457c7 # Pull Quote
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 47360d40-aec0-44ea-a405-f9512ae28038 # Position
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  47360d40-aec0-44ea-a405-f9512ae28038: # Position
+    contentColumnType: string
+    fieldGroup: null
+    handle: position
+    instructions: ''
+    name: Position
+    searchable: true
+    settings:
+      default: center
+      options:
+        __assoc__:
+          -
+            - left
+            - '1'
+          -
+            - center
+            - '1'
+          -
+            - right
+            - '1'
+          -
+            - full
+            - ''
+          -
+            - drop-left
+            - ''
+          -
+            - drop-right
+            - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: rias\positionfieldtype\fields\Position
+  c78b71a4-edb3-41d9-96cc-b9c5b55457c7: # Pull Quote
+    contentColumnType: text
+    fieldGroup: null
+    handle: pullQuote
+    instructions: ''
+    name: 'Pull Quote'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: pullQuote
+name: 'Pull Quote'
+sortOrder: 4

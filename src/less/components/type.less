@@ -1,0 +1,23 @@
+dl.dl-horizontal {
+    @screen sm {
+        @apply .flex;
+        @apply .flex-wrap;
+    }
+
+    dt {
+        @apply .font-bold;
+
+        @screen sm {
+            @apply .w-48;
+            @apply .mb-2;
+        }
+    }
+
+    dd {
+        @apply .mb-2;
+
+        @screen sm {
+            width: calc(100% - 12rem);
+        }
+    }
+}

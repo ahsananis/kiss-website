@@ -1,0 +1,3 @@
+{% set firstCategory = craft.categories.group('resources').one() %}
+
+{% redirect firstCategory.url %}

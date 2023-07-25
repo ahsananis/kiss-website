@@ -1,0 +1,76 @@
+fieldLayouts:
+  169f3c59-4e6b-459a-820c-750afe53b19a:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 09c27b5a-fe94-42cb-acd1-e9e9379c811b # Gift Aid Confirmation Message
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: b98d563f-54eb-49af-b254-faafe8dba69a # Gift Aid Legal Message
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c4ffde7a-3705-4c9e-a679-2f87d079959a # Donation Page CTA Message
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: fd048b43-0118-4de3-aa0e-e959d12371c5 # Donation Thank You Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 82033584-a35a-41c5-87ab-df11d99131d0 # Donation Page Keeping In Touch Message
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Messages
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 12004925-341a-49a1-af98-748d424355fb # Donation Email Thank You Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 87652666-cb03-4d37-be42-ec3d7ed8723d # Shop Email Thank You Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Emails
+        sortOrder: 2
+handle: messages
+name: Messages

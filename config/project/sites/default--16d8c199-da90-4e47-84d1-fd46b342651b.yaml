@@ -1,0 +1,9 @@
+baseUrl: $DEFAULT_SITE_URL
+enabled: true
+handle: default
+hasUrls: true
+language: en-GB
+name: 'Kiddies Support Scheme'
+primary: true
+siteGroup: 209d6037-e437-4b85-a375-c0eeb5015f6e # Kiddies Support Scheme
+sortOrder: 1

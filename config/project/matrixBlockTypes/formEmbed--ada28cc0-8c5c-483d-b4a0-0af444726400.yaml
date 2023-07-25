@@ -1,0 +1,43 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  e9d56656-ee16-487a-9cb8-62165bdf35a8:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 03b72b2b-1ddb-416e-947e-c2882c8cc691 # Form
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  03b72b2b-1ddb-416e-947e-c2882c8cc691: # Form
+    contentColumnType: string
+    fieldGroup: null
+    handle: form
+    instructions: ''
+    name: Form
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Add a form'
+      showSiteMenu: true
+      source: null
+      sources:
+        - 'section:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: formEmbed
+name: 'Form Embed'
+sortOrder: 12

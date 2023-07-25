@@ -1,0 +1,239 @@
+field: 0144730a-aeae-482f-a689-7179dca69a41 # Hero Media
+fieldLayouts:
+  7a3f9ff5-3dbf-44c1-a0fd-0e32fea541c9:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: a6c694a1-4c91-41bf-b123-0b12617af76c
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: e826ba69-f6a3-432c-99da-2896271a0a6e
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 545a85ad-94f4-486d-97ed-b987f8631f48
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 09a8b4f8-c3bf-4805-8d97-bea7d133327d # Poster Image
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 4602ddbe-9d45-488a-a362-be1a750a8e1b
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  09a8b4f8-c3bf-4805-8d97-bea7d133327d: # Poster Image
+    contentColumnType: string
+    fieldGroup: null
+    handle: posterImage
+    instructions: ''
+    name: 'Poster Image'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - image
+      defaultUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      defaultUploadLocationSubpath: ''
+      limit: '1'
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: 'Add an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  4602ddbe-9d45-488a-a362-be1a750a8e1b:
+    contentColumnType: string
+    fieldGroup: null
+    handle: aspectRatio
+    instructions: ''
+    name: 'Aspect Ratio'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - '21 by 9'
+            -
+              - value
+              - ratio21by9
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - '16 by 9'
+            -
+              - value
+              - ratio16by9
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - '4 by 3'
+            -
+              - value
+              - ratio4by3
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  545a85ad-94f4-486d-97ed-b987f8631f48:
+    contentColumnType: string
+    fieldGroup: null
+    handle: sd
+    instructions: "**Video Codec:** MP4\r\n**Video Bitrate:** 4 Mbps\r\n**Audio Codec:** ACC 48 kHz, Stereo\r\n**Audio Bitrate:** 320 kbps"
+    name: 'SD (854×480)'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - video
+      defaultUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      defaultUploadLocationSubpath: ''
+      limit: ''
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: ''
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  a6c694a1-4c91-41bf-b123-0b12617af76c:
+    contentColumnType: string
+    fieldGroup: null
+    handle: video
+    instructions: "**Video Codec:** MP4\r\n**Video Bitrate:** 16 Mbps\r\n**Audio Codec:** ACC 48 kHz, Stereo\r\n**Audio Bitrate:** 320 kbps"
+    name: 'Full HD (1920×1080)'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - video
+      defaultUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      defaultUploadLocationSubpath: ''
+      limit: ''
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: 'Add a video'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  e826ba69-f6a3-432c-99da-2896271a0a6e:
+    contentColumnType: string
+    fieldGroup: null
+    handle: hd
+    instructions: "**Video Codec:** MP4\r\n**Video Bitrate:** 8 Mbps\r\n**Audio Codec:** ACC 48 kHz, Stereo\r\n**Audio Bitrate:** 320 kbps"
+    name: 'HD (1280×720)'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - video
+      defaultUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      defaultUploadLocationSubpath: ''
+      limit: ''
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: ''
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+handle: video
+name: Video
+sortOrder: 2

@@ -1,0 +1,36 @@
+fieldLayouts:
+  f5ee27ce-c316-4002-a042-35722bdc2f48:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: e23ccdd2-a8a8-4ac0-b8a4-1a0de1b311f5 # Relationship to KiSS
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: bc55f86d-f29d-4624-ac4a-7ab2144954e5 # Mailing List CTA Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 6866185a-a8dd-48d5-a665-ca6adf38dc7b # Mailing List Popup CTA Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Setting
+        sortOrder: 1
+handle: mailingList
+name: 'Mailing List'

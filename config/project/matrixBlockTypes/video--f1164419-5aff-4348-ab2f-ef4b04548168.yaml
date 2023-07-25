@@ -1,0 +1,136 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  3ff9469b-75d8-453c-a618-7b32bb964122:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 27596973-38ad-49dc-89b0-885b3b7ed787 # Video URL
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a5c7a4cd-bac5-4807-85a0-08ad813e5d66 # Aspect Ratio
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cc28615d-0206-492a-a51d-ffc50f49e283 # Position
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  27596973-38ad-49dc-89b0-885b3b7ed787: # Video URL
+    contentColumnType: text
+    fieldGroup: null
+    handle: videoUrl
+    instructions: 'Enter the URL for a YouTube or Vimeo video.'
+    name: 'Video URL'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: 'e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  a5c7a4cd-bac5-4807-85a0-08ad813e5d66: # Aspect Ratio
+    contentColumnType: string
+    fieldGroup: null
+    handle: aspectRatio
+    instructions: ''
+    name: 'Aspect Ratio'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - '21 by 9'
+            -
+              - value
+              - ratio21by9
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - '16 by 9'
+            -
+              - value
+              - ratio16by9
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - '4 by 3'
+            -
+              - value
+              - ratio4by3
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  cc28615d-0206-492a-a51d-ffc50f49e283: # Position
+    contentColumnType: string
+    fieldGroup: null
+    handle: position
+    instructions: ''
+    name: Position
+    searchable: true
+    settings:
+      default: full
+      options:
+        __assoc__:
+          -
+            - left
+            - '1'
+          -
+            - center
+            - '1'
+          -
+            - right
+            - '1'
+          -
+            - full
+            - '1'
+          -
+            - drop-left
+            - ''
+          -
+            - drop-right
+            - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: rias\positionfieldtype\fields\Position
+handle: video
+name: Video
+sortOrder: 8

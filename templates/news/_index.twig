@@ -1,0 +1,29 @@
+{% extends "_layouts/site" %}
+
+{% set widths = ['w-3/5', 'w-2/5', 'w-1/2', 'w-1/2', 'w-3/5', 'w-2/5', 'w-1/2', 'w-1/2'] %}
+
+{% set newsEntriesCriteria = craft.entries.section('news').orderBy('postDate desc') %}
+{% set isFirstPage = craft.app.request.pageNum == 1 %}
+{% set limit = isFirstPage ? 7 : 6 %}
+{% paginate newsEntriesCriteria.limit(limit) as newsEntries %}
+{% if isFirstPage %}
+    {% set widths = ['w-full']|merge(widths) %}
+{% endif %}
+
+{% block main %}
+    <div class="container max-w-xl">
+        {% include "_includes/heading" %}
+
+        <div class="row">
+            {% for newsEntry in newsEntries %}
+                {% set isFeaturedEntry = (loop.first and isFirstPage) %}
+
+                <div class="col sm:flex {% if isFeaturedEntry %}sm:w-full{% else %}sm:w-1/2{% endif %} lg:{{ cycle(widths, (loop.index0)) }}">
+                    {% include 'news/_card' with { entry: newsEntry } %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% include '_includes/pagination' %}
+    </div>
+{% endblock %}

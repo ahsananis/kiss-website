@@ -1,0 +1,35 @@
+{% if paginate.totalPages > 1 %}
+    <div class="text-center">
+        <ul>
+            {% if paginate.prevUrl %}
+                <li class="inline-block">
+                    <a class="hover:text-blue" href="{{ paginate.prevUrl }}">
+                        {% include "_includes/icons/chevron-left.svg" with { class: '-mt-1 w-6 h-6' } only %}
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page, url in paginate.getPrevUrls(5) %}
+                <li class="inline-block">
+                    <a class="p-2 text-xl hover:text-blue border-b-2 border-transparent" href="{{ url }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+
+            <li class="inline-block p-2 text-xl text-blue border-b-2 border-blue">{{ paginate.currentPage }}</li>
+
+            {% for page, url in paginate.getNextUrls(5) %}
+                <li class="inline-block">
+                    <a class="p-2 text-xl hover:text-blue border-b-2 border-transparent" href="{{ url }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+
+            {% if paginate.nextUrl %}
+                <li class="inline-block">
+                    <a class="hover:text-blue" href="{{ paginate.nextUrl }}">
+                        {% include "_includes/icons/chevron-right.svg" with { class: '-mt-1 w-6 h-6' } only %}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

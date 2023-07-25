@@ -1,0 +1,18 @@
+contentColumnType: text
+fieldGroup: 58aff042-feb1-42a8-b2c3-1795d837621b # Events
+handle: datePlaceholder
+instructions: 'Use this field to provide a message rather than an event date.'
+name: 'Date Placeholder'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: 'Date coming soon'
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

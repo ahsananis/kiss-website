@@ -1,0 +1,91 @@
+field: f1c57532-9589-45a9-b178-22beaea089aa # Fields
+fieldLayouts:
+  e5e280b5-3097-4afd-99d2-9e18f3894454:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: bf3e0e69-f824-4305-988f-83a8d9294eb6 # Label
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8b591d3c-4ce7-4ecb-be71-b0e22a08bc0e
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 34edc0a7-a8ab-45c0-8e9f-3bfaa6e1483c
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  34edc0a7-a8ab-45c0-8e9f-3bfaa6e1483c:
+    contentColumnType: text
+    fieldGroup: null
+    handle: instructions
+    instructions: ''
+    name: Instructions
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  8b591d3c-4ce7-4ecb-be71-b0e22a08bc0e:
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: required
+    instructions: ''
+    name: Required
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  bf3e0e69-f824-4305-988f-83a8d9294eb6: # Label
+    contentColumnType: text
+    fieldGroup: null
+    handle: label
+    instructions: ''
+    name: Label
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: text
+name: Text
+sortOrder: 1

@@ -1,0 +1,49 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  6f9e74d7-4738-482d-93c4-d6b0d63c4922:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 0f0550fc-def0-4211-a81e-30563d4f35e7 # Message
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0f0550fc-def0-4211-a81e-30563d4f35e7: # Message
+    contentColumnType: text
+    fieldGroup: null
+    handle: message
+    instructions: 'Use this field if you want to override the default message set globally [here](/cms-admin/globals/mailingList).'
+    name: Message
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: ''
+      cleanupHtml: true
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Simple.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: '1'
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: mailingListForm
+name: 'Mailing List Form'
+sortOrder: 10

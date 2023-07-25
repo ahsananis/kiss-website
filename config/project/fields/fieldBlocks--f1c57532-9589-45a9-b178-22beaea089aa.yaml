@@ -1,0 +1,14 @@
+contentColumnType: string
+fieldGroup: 9a1e772e-4c45-4b9d-b536-a230076feb3e # Forms
+handle: fieldBlocks
+instructions: ''
+name: Fields
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_fieldblocks}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

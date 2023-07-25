@@ -1,0 +1,77 @@
+@screen lg {
+    .breakout.lg\:float-left {
+        @apply .mr-5;
+    }
+
+    .breakout.lg\:float-right {
+        @apply .ml-5;
+        @apply .pl-5;
+        @apply .pr-0;
+    }
+}
+
+@screen xl {
+    .breakout {
+        width: calc(50% + 110px) !important;
+    }
+
+    .breakout.lg\:float-left {
+        margin-left: -110px;
+    }
+
+    .breakout.lg\:float-right {
+        margin-right: -110px;
+    }
+}
+
+article {
+    @apply .text-lg;
+
+    // @todo: find a better way to target these headings!
+    h1:not(.uppercase), h2:not(.uppercase), h3:not(.uppercase), h4:not(.uppercase), h5:not(.uppercase), h6:not(.uppercase) {
+        @apply .mb-4;
+        @apply .text-3xl;
+        @apply .font-semibold;
+        @apply .font-marujo-fino-sans;
+        @apply .leading-tight;
+        @apply .tracking-wide;
+    }
+
+    a {
+        @apply .font-semibold;
+        @apply .border-b-2;
+        @apply .border-yellow;
+    }
+
+    p {
+        @apply .mb-6;
+    }
+
+    ul,
+    ol {
+        @apply .mb-6;
+        padding-left: 3rem !important;
+
+        > li {
+            @apply .mb-2;
+
+            ul,
+            ol {
+                @apply .mt-2;
+            }
+        }
+    }
+
+    ul {
+        list-style: disc !important;
+    }
+
+    ol {
+        list-style: decimal !important;
+    }
+
+    .pullquote {
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+}

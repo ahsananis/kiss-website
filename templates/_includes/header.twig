@@ -1,0 +1,86 @@
+{% set pageLinks = craft.entries.section('pages').showInNavigation(true).level(1).all() %}
+
+<header class="site-header">
+    <div class="container flex">
+        <a class="site-header-logo" href="{{ siteUrl }}">
+            <img src="{{ siteUrl('assets/img/logo.png') }}" srcset="{{ siteUrl('assets/img/logo@2x.png') }} 2x" alt="{{ siteName }}">
+        </a>
+
+        <nav class="site-header-nav">
+            {% for pageEntry in pageLinks %}
+                {% set descendants = craft.entries.descendantOf(pageEntry).showInNavigation(true) %}
+
+                <div class="site-header-nav-item">
+                    <a class="site-header-nav-link" href="{{ pageEntry.url }}">
+                        {{ pageEntry.title }}
+
+                        {% if descendants.count() %}
+                            {% include "_includes/icons/chevron-down.svg" with { class: 'site-header-subnav-icon' } only %}
+                        {% endif %}
+                    </a>
+                    {% if descendants.count() %}
+                        <nav class="site-header-subnav">
+                            <div class="site-header-subnav-inner">
+                                {% for subEntry in descendants.all() %}
+                                    <div class="site-header-subnav-item">
+                                        <a class="site-header-subnav-link" href="{{ subEntry.url }}">
+                                            {{ subEntry.title }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </nav>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </nav>
+        
+        <div class="site-header-donate">
+            {% set entry = craft.entries.section('donate').one() %}
+            {% if entry %}
+                <a class="btn lg:btn-lg btn-yellow" href="{{ entry.url }}">
+                    Donate
+                </a>
+            {% endif %}
+        </div>
+    
+        <div class="site-header-nav-toggle">
+            <button data-toggle-nav="open" class="open-navigation">
+                <span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div data-mobile-nav class="mobile-nav">
+    <button data-toggle-nav="close" class="close-navigation"></button>
+
+    <nav class="mobile-nav-inner">
+        {% for pageEntry in pageLinks %}
+            {% set descendants = craft.entries.descendantOf(pageEntry).showInNavigation(true) %}
+
+            <div class="mobile-nav-item">
+                <a class="mobile-nav-link" href="{{ pageEntry.url }}"{% if descendants.count() %} data-toggle-element="[data-mobile-nav-subnav]"{% endif %}>
+                    {{ pageEntry.title }}
+
+                    {% if descendants.count() %}
+                        <span class="mobile-nav-subnav-icon"></span>
+                    {% endif %}
+                </a>
+                {% if descendants.count() %}
+                    <nav data-mobile-nav-subnav class="mobile-nav-subnav">
+                        <div class="mobile-nav-subnav-inner">
+                            {% for subEntry in descendants.all() %}
+                                <div class="mobile-nav-subnav-item">
+                                    <a class="mobile-nav-subnav-link" href="{{ subEntry.url }}">
+                                        {{ subEntry.title }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </nav>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </nav>
+</div>

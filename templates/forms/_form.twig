@@ -1,0 +1,172 @@
+{% if craft.app.session.hasFlash('notice') %}
+    <div class="bg-green-lightest border-l-4 border-green text-green-dark p-4 last-child:mb-0">
+        <p>{{ craft.app.session.getFlash('notice')|raw }}</p>
+    </div>
+{% elseif craft.app.session.hasFlash('error') %}
+    <div class="bg-red-lightest border-l-4 border-red text-red-dark mb-6 p-4 last-child:mb-0">
+        <p>{{ craft.app.session.getFlash('error') }}</p>
+    </div>
+{% endif %}
+
+{% if not craft.app.session.hasFlash('notice') %}
+    <form method="post" action="" accept-charset="UTF-8" data-form-embed>
+        {{ csrfInput() }}
+        <input type="hidden" name="action" value="contact-form/send">
+        <input type="hidden" name="formId" value="{{ form.id|hash }}">
+
+
+        {# <input type="hidden" name="fromEmail" value="{{ 'kiss@kiddiessupportscheme.org'|hash }}"> #}
+        <input type="hidden" name="fromEmail" value="kiss@kiddiessupportscheme.org">
+
+
+        {# The form submission will be sent to the `toEmail` if set, otherwise it will be sent to the email set in the Contact Form settings #}
+        {%- if form.toEmail|length -%}
+            <input type="hidden" name="toEmail" value="{{ form.toEmail|hash }}">
+        {%- endif -%}
+
+        {# Override the flash message on a form by form basis by setting `successFlashMessage` in `craft/config/contactform.php` to this post variable #}
+        {%- if entry.successMessage|length -%}
+            <input type="hidden" name="notice" value="{{ entry.successMessage|hash }}" />
+        {%- endif -%}
+
+        {% for hiddenField in form.fieldBlocks.type('hidden').all() %}
+            {%- set label = hiddenField.label -%}
+            {%- set value = hiddenField.hiddenValue -%}
+
+            <input
+                type="hidden"
+                name="message[{{ label }}]"
+                value="{{ value }}"
+            >
+        {% endfor %}
+
+        {% for field in form.fieldBlocks.type('not hidden').all() %}
+            {%- set label = field.label -%}
+            {%- set value = attribute(message.message, label) ?? '' -%}
+            {%- set required = field.required ?? false -%}
+            {%- set id = "field-" ~ field.id -%}
+            {%- set type = field.type.handle -%}
+
+            <div class="mb-6">
+                {% switch type %}
+
+                    {% case "text" %}
+                        <label for="{{ id }}"{% if required %} class="required"{% endif %}>{{ label }}</label>
+                        <input
+                            type="{{ type }}"
+                            name="message[{{ label }}]"
+                            id="{{ id }}"
+                            value="{{ value }}"
+                            class="form-control{% if message is defined and message.hasErrors('message.' ~ label) %} is-invalid{% endif %}"
+                            {% if required %}
+                                required
+                            {% endif %}
+                        >
+                        {% if message is defined and message.hasErrors('message.' ~ label) %}
+                            <p class="invalid-feedback">{{ message.getErrors('message.' ~ label)[0] }}</p>
+                        {% endif %}
+
+                        {% if not (message is defined and message.hasErrors('message.' ~ label)) and field.instructions %}
+                            <p class="form-text">{{ field.instructions }}</p>
+                        {% endif %}
+
+                    {% case "checkbox" or "radio" %}
+                        {% set inline = field.display == 'inline' %}
+
+                        <label{% if required %} class="required"{% endif %}>{{ label }}</label>
+                        <div>
+                            {%- for i, option in field.options -%}
+                                {% set id = id ~ "-option-" ~ i %}
+
+                                <div class="form-check{% if inline %} form-check-inline{% endif %} mb-2">
+                                    <input
+                                        type="{{ type }}"
+                                        name="message[{{ label }}]{{- (type == 'checkbox' ? '[]') -}}"
+                                        id="{{ id }}"
+                                        class="form-check-input"
+                                        value="{{ option.value }}"
+                                        {% if option.selected %}
+                                            checked
+                                        {% endif %}
+                                        {% if required %}
+                                            required
+                                        {% endif %}
+                                    >
+                                    <label for="{{ id }}" class="form-check-label">
+                                        {{ option.label }}
+                                    </label>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                        {% if message is defined and message.hasErrors('message.' ~ label) %}
+                            <p class="invalid-feedback">{{ message.getErrors('message.' ~ label)[0] }}</p>
+                        {% endif %}
+
+                        {% if not (message is defined and message.hasErrors('message.' ~ label)) and field.instructions %}
+                            <p class="form-text">{{ field.instructions }}</p>
+                        {% endif %}
+
+                    {% case "select" %}
+                        <label for="{{ id }}"{% if required %} class="required"{% endif %}>{{ label }}</label>
+                        <select
+                            name="message[{{ label }}]"
+                            id="{{ id }}"
+                            class="form-control"
+                            {% if required %}
+                                required
+                            {% endif %}
+                        >
+                            <option disabled>Choose an option</option>
+
+                            {%- for option in field.options -%}
+                                {%- set value = option.value ?? option.label -%}
+                                {%- set label = option.label ?? "" -%}
+
+                                <option
+                                    value="{{ value }}"
+                                    {% if option.selected %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ label }}
+                                </option>
+                            {%- endfor -%}
+                        </select>
+                        {% if message is defined and message.hasErrors('message.' ~ label) %}
+                            <p class="invalid-feedback">{{ message.getErrors('message.' ~ label)[0] }}</p>
+                        {% endif %}
+
+                        {% if not (message is defined and message.hasErrors('message.' ~ label)) and field.instructions %}
+                            <p class="form-text">{{ field.instructions }}</p>
+                        {% endif %}
+
+                    {% case "textarea" %}
+                        <label for="{{ id }}"{% if required %} class="required"{% endif %}>{{ label }}</label>
+                        <textarea
+                            name="message[{{ label }}]"
+                            id="{{ id }}"
+                            class="form-control"
+                            {% if required %}
+                                required
+                            {% endif %}
+                        >{{ value }}</textarea>
+                        {% if message is defined and message.hasErrors('message.' ~ label) %}
+                            <p class="invalid-feedback">{{ message.getErrors('message.' ~ label)[0] }}</p>
+                        {% endif %}
+
+                        {% if not (message is defined and message.hasErrors('message.' ~ label)) and field.instructions %}
+                            <p class="form-text">{{ field.instructions }}</p>
+                        {% endif %}
+
+                    {% case "instructions" %}
+                        <div class="wysiwyg">
+                            {{ field.instructions }}
+                        </div>
+
+                {% endswitch %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-yellow">{{ form.submitLabel }}</button>
+    </form>
+{% endif %}

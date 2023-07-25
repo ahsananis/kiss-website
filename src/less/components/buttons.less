@@ -1,0 +1,70 @@
+.btn {
+    @apply .inline-block;
+    @apply .relative;
+    @apply .py-3;
+    @apply .px-6;
+    @apply .font-medium;
+    @apply .leading-normal;
+    @apply .border-2;
+    @apply .rounded-full;
+    @apply .select-none;
+    transition: background .2s, color .2s, border .2s;
+}
+
+@responsive {
+    .btn-lg {
+        @apply .py-4;
+        @apply .px-8;
+    }
+}
+
+.btn-grey-20 {
+    @apply .text-grey-60;
+    @apply .bg-grey-20;
+    @apply .border-grey-20;
+
+    &:hover {
+        @apply .bg-grey-30;
+        @apply .border-grey-30;
+    }
+}
+
+.btn-yellow {
+    @apply .text-grey-100;
+    @apply .bg-yellow;
+    @apply .border-yellow;
+
+    &:hover {
+        @apply .bg-transparent;
+    }
+}
+
+.btn:disabled {
+    opacity: 0.65;
+    @apply .cursor-auto;
+}
+
+.is-working {
+    color: transparent;
+    pointer-events: none;
+
+    &:after {
+        left: calc(50% - (1rem / 2));
+        top: calc(50% - (1rem / 2));
+        position: absolute;
+
+        animation: spinAround .5s infinite linear;
+        border: 2px solid #dbdbdb;
+        border-radius: 290486px;
+        content: "";
+        display: block;
+        height: 1rem;
+        width: 1rem;
+    }
+}
+
+.btn-grey-20.is-working:after,
+.btn-yellow.is-working:after,
+.bg-blue-lighter.is-working:after {
+    border-color: transparent transparent rgba(0,0,0,.7) rgba(0,0,0,.7);
+}

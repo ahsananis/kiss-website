@@ -1,0 +1,42 @@
+{% extends "_layouts/site" %}
+
+{% block main %}
+    <div class="container">
+        {% include "_includes/heading" with { entry: category } only %}
+
+        <div class="row -mb-6 sm:-mb-10">
+            {% for resource in craft.assets.volume('resources').relatedTo(category).all() %}
+                <div class="col md:flex lg:w-1/2">
+                    <div class="card card-faux-link mb-6 sm:mb-10">
+                        <div class="flex flex-wrap flex-1">
+                            {% set thumbnail = resource.resourceThumbnail.one() %}
+                            {% if thumbnail %}
+                                <div class="relative w-full sm:w-48 aspect-ratio-16/9 sm:aspect-ratio-none">
+                                    <picture>
+                                        <source media="(min-width: 768px)" srcset="{{ thumbnail.getUrl({ width: 192, height: 284 }) }}">
+                                        <source srcset="{{ thumbnail.getUrl({ width: 800, height: 450 }) }}">
+                                        <img class="absolute pin-t pin-l w-full h-full object-cover rounded-t md:rounded-t-none md:rounded-l" src="{{ thumbnail.getUrl({ width: 192, height: 284 }) }}" alt="{{ resource.title }}">
+                                    </picture>
+                                </div>
+                            {% endif %}
+
+                            <div class="w-full sm:flex sm:flex-1">
+                                <div class="card-body flex flex-col flex-1">
+                                    <h3 class="card-title">{{ resource.title }}</h3>
+                                    <div class="mb-6 wysiwyg text-grey-60">
+                                        {{ resource.shortDescription }}
+                                    </div>
+                                    <div class="mt-auto">
+                                        <a href="{{ resource.url }}" class="btn btn-yellow">Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="{{ resource.url }}" class="card-faux-link-overlay" tabindex="-1">{{ resource.title }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

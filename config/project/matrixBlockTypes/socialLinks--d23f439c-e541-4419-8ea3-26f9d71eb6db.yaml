@@ -1,0 +1,78 @@
+field: 28761c4b-a716-4ece-9edf-8eca45b41219 # Article Body
+fieldLayouts:
+  b51b022a-5138-49e9-9a5b-43375ac892a8:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: f8418653-5732-48bc-b913-8511b40723a1 # Platforms
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  f8418653-5732-48bc-b913-8511b40723a1: # Platforms
+    contentColumnType: string
+    fieldGroup: null
+    handle: platforms
+    instructions: 'Choose which platforms you''d like to show. Your links will be taken from the [Footer Content](/cms-admin/globals/footerContent) page.'
+    name: Platforms
+    searchable: true
+    settings:
+      multi: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Facebook
+            -
+              - value
+              - facebook
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Instagram
+            -
+              - value
+              - instagram
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Twitter
+            -
+              - value
+              - twitter
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - LinkedIn
+            -
+              - value
+              - linkedin
+            -
+              - default
+              - '1'
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Checkboxes
+handle: socialLinks
+name: 'Social Links'
+sortOrder: 11

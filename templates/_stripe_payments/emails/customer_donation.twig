@@ -1,0 +1,9 @@
+{% extends '_stripe_payments/emails/_layout' %}
+
+{% block body %}
+    {{ messages.donationEmailThankYouMessage }}
+
+    <p>
+        <a href="{{ order.getPaymentForm().getReturnUrl(order) }}">Read more</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,13 @@
+contentColumnType: boolean
+fieldGroup: 1691603b-af34-4eb7-9699-59299ff920c0 # Navigation
+handle: showInNavigation
+instructions: ''
+name: 'Show in Navigation'
+searchable: true
+settings:
+  default: true
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

@@ -1,0 +1,14 @@
+contentColumnType: string
+fieldGroup: ecfb2b38-f04d-4397-ae88-f420b694b2f2 # Common
+handle: articleBody
+instructions: ''
+name: 'Article Body'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_articlebody}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

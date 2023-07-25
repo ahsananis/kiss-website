@@ -1,0 +1,14 @@
+contentColumnType: string
+fieldGroup: 0be9b4b2-d728-4c0d-8b83-6eb5f68988a7 # Homepage
+handle: heroMedia
+instructions: ''
+name: 'Hero Media'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_heromedia}}'
+  maxBlocks: '1'
+  minBlocks: ''
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

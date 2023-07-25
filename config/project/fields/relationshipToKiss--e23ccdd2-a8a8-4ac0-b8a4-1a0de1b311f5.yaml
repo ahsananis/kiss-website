@@ -1,0 +1,38 @@
+contentColumnType: text
+fieldGroup: 2e6bbf3b-ca98-4dd3-8c78-1493f1e962ba # Globals
+handle: relationshipToKiss
+instructions: ''
+name: 'Relationship to KiSS'
+searchable: true
+settings:
+  addRowLabel: 'Add a row'
+  columnType: text
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - Relationship
+            -
+              - handle
+              - relationship
+            -
+              - width
+              - ''
+            -
+              - type
+              - singleline
+  defaults:
+    -
+      __assoc__:
+        -
+          - col1
+          - ''
+  maxRows: ''
+  minRows: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

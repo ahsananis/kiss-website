@@ -1,0 +1,9 @@
+<div class="section container max-w-md sm:text-center">
+    <h1 class="mb-4 font-marujo-sans font-normal uppercase text-3xl md:text-5xl">{{ entry.title }}</h1>
+
+    {% if entry.body %}
+        <div class="wysiwyg">
+            {{ entry.body|raw }}
+        </div>
+    {% endif %}
+</div>

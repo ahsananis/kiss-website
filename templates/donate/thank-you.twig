@@ -1,0 +1,66 @@
+{% set number = craft.app.request.getParam('number') %}
+{% set donation = craft.enupalStripe.getOrderByNumber(number) %}
+
+{% if not donation or donation.getPaymentForm().handle not in craft.app.config.general.donationFormHandles %}
+    {% exit 404 %}
+{% endif %}
+
+{% extends "_layouts/site" %}
+{% import "_macros/share" as share %}
+{% set seo = craft.seo.custom('My donation') %}
+{% set giftAidMultiplyer = craft.app.config.general.giftAidMultiplyer %}
+
+{% block main %}
+
+    <div class="container">
+        {# @todo: DRY - super close to _includes/heading #}
+        <div class="section max-w-lg mx-auto">
+            <h1 class="mb-4 font-marujo-sans font-normal uppercase text-3xl md:text-5xl sm:text-center">Thank you so much for your donation!</h1>
+
+            <div class="mb-12 wysiwyg">
+                {{ messages.donationThankYouMessage }}
+            </div>
+
+            <div class="mb-12">
+                <h2 class="mb-2 text-2xl font-semibold font-marujo-fino-sans tracking-wide">Tell others you’ve donated</h2>
+                <p class="mb-4">Why not spread the word about your donation and encourage your friends to give as well.</p>
+
+                {% set entry = craft.entries.section('donate').one() %}
+                {{ share.links({
+                    message: 'I’ve just donate to KiSS. You can too.',
+                    url: entry.url,
+                }) }}
+            </div>
+
+            <div>
+                <p class="mb-4">Confirmation of your donation:</p>
+
+                <dl class="dl-horizontal">
+                    <dt>Amount:</dt>
+                    <dd>{{ donation.totalPrice|currency(donation.currency)|replace({ '.00': '' }) }}</dd>
+                    <dt>Gift Aid:</dt>
+                    <dd>
+                        {% if donation.getFormFields()['giftAid']|default(false) == true %}
+                            {{ (donation.totalPrice * (giftAidMultiplyer - 1))|currency(donation.currency)|replace({ '.00': '' }) }}
+                        {% else %}
+                            Not applied    
+                        {% endif %}
+                    </dd>
+                    <dt>Payment Type:</dt>
+                    <dd>
+                        {% if donation.isSubscription() %}
+                            {# @todo: get from order? #}
+                            Monthly
+                        {% else %}
+                            Single
+                        {% endif %}
+                        - Credit / Debit Card
+                    </dd>
+                    <dt>Reference Number:</dt>
+                    <dd>{{ donation.stripeTransactionId }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

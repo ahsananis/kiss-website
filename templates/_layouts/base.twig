@@ -1,0 +1,47 @@
+{% include "_includes/headers" %}
+<!DOCTYPE html>
+<html lang="{{ craft.app.language }}" class="bg-white antialiased">
+    <head>
+        {% block head %}
+            {% if not craft.app.request.isLivePreview and craft.app.config.general.googleAnalyticsTrackingId and craft.app.config.env == 'production' %}
+                <script async src="https://www.googletagmanager.com/gtag/js?id={{ craft.app.config.general.googleAnalyticsTrackingId }}"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    document.addEventListener('turbolinks:load', function(event) {
+                        if (typeof gtag === 'function') {
+                            gtag('config', '{{ craft.app.config.general.googleAnalyticsTrackingId }}', {
+                                'page_location': event.data.url,
+                            });
+                        }
+                    });
+                </script>
+            {% endif %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="csrf-token" content="{{ craft.app.request.csrfToken }}">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            {% hook "seo" %}
+            <link rel="stylesheet" type="text/css" href="{{ siteUrl|trim('/', 'right') ~ mix('css/styles.css') }}" data-turbolinks-track="reload">
+            <link rel="stylesheet" type="text/css" href="{{ siteUrl|trim('/', 'right') ~ mix('css/player.css') }}" data-turbolinks-track="reload">
+            <script src="{{ siteUrl|trim('/', 'right') ~ mix('js/picturefill.min.js') }}" data-turbolinks-track="reload" async></script>
+            <script src="{{ siteUrl|trim('/', 'right') ~ mix('js/main.js') }}" data-turbolinks-track="reload" defer></script>
+        {% endblock %}
+    </head>
+    <body class="font-sans font-normal text-grey-100 leading-normal{% if bodyClass is defined %} {{ bodyClass }}{% endif %}">
+        <div id="site">
+            <div class="min-h-screen flex flex-col">
+                {% block body %}{% endblock %}
+            </div>
+
+            {% block modals %}{% endblock %}
+        </div>
+
+        <script>
+            // Fix for Chrome CSS Transition On Load Bug
+            // See: https://www.kylehawk.name/weird-google-chrome-css-transition-on-load-bug/
+        </script>
+    </body>
+</html>

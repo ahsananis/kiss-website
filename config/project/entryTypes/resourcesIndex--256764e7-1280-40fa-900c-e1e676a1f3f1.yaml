@@ -1,0 +1,38 @@
+fieldLayouts:
+  9e170017-7aad-4665-8354-ad00ea04c353:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: resourcesIndex
+hasTitleField: false
+name: 'Resources Index'
+section: 2cc667a3-6f4c-49b6-ac8e-a12183ed4be8
+sortOrder: 1
+titleFormat: Resources
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

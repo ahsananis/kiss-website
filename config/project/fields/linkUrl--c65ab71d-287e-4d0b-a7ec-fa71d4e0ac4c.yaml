@@ -1,0 +1,18 @@
+contentColumnType: text
+fieldGroup: ecfb2b38-f04d-4397-ae88-f420b694b2f2 # Common
+handle: linkUrl
+instructions: ''
+name: 'Link URL'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: 'e.g. https://example.com'
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

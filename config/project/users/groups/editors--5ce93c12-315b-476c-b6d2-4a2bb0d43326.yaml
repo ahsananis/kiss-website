@@ -1,0 +1,144 @@
+description: null
+handle: editors
+name: Editors
+permissions:
+  - accesscp
+  - accesscpwhensystemisoff
+  - accessplugin-enupal-stripe
+  - accessplugin-pic-puller
+  - accessplugin-seo
+  - accesssitewhensystemisoff
+  - administrateusers
+  - assignusergroups
+  - 'createentries:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'createentries:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'createentries:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'createentries:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'createentries:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - 'createfoldersinvolume:1948a874-8ce9-4592-a201-3448fe68e4c7' # Product Images
+  - 'createfoldersinvolume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+  - 'createfoldersinvolume:4c698e15-4753-437f-b292-60fb0a5e673f' # Resources
+  - 'deleteentries:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'deleteentries:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'deleteentries:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'deleteentries:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'deleteentries:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - 'deletefilesandfoldersinvolume:1948a874-8ce9-4592-a201-3448fe68e4c7' # Product Images
+  - 'deletefilesandfoldersinvolume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+  - 'deletefilesandfoldersinvolume:4c698e15-4753-437f-b292-60fb0a5e673f' # Resources
+  - 'deletepeerentries:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'deletepeerentries:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'deletepeerentries:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'deletepeerentries:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'deletepeerentries:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - 'deletepeerentrydrafts:01b61775-b707-483e-9dbc-8eb711a4ff66'
+  - 'deletepeerentrydrafts:2adc1ead-6feb-43cf-804c-eb32b4bbcf7c'
+  - 'deletepeerentrydrafts:2cc667a3-6f4c-49b6-ac8e-a12183ed4be8'
+  - 'deletepeerentrydrafts:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'deletepeerentrydrafts:52701c8c-c37c-4982-9eb2-129960f0f7f3'
+  - 'deletepeerentrydrafts:5f0dc449-94f1-4732-a84c-5795b8d3bb7b'
+  - 'deletepeerentrydrafts:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'deletepeerentrydrafts:62aced0c-cee2-4490-89bf-45f06390f5fd'
+  - 'deletepeerentrydrafts:809e57fb-b7b0-4562-838e-7a9634ed4050'
+  - 'deletepeerentrydrafts:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'deletepeerentrydrafts:887c3c6e-b5fc-462c-83b6-63bb1fa465ef'
+  - 'deletepeerentrydrafts:a2b9d81e-e4fd-44c7-99f8-31a419d6cfd4'
+  - 'deletepeerentrydrafts:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'deletepeerentrydrafts:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - deleteusers
+  - 'editcategories:1fc6995f-73e9-440b-81c7-0e5400dce12b' # Resources
+  - 'editentries:01b61775-b707-483e-9dbc-8eb711a4ff66'
+  - 'editentries:2adc1ead-6feb-43cf-804c-eb32b4bbcf7c'
+  - 'editentries:2cc667a3-6f4c-49b6-ac8e-a12183ed4be8'
+  - 'editentries:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'editentries:52701c8c-c37c-4982-9eb2-129960f0f7f3'
+  - 'editentries:5f0dc449-94f1-4732-a84c-5795b8d3bb7b'
+  - 'editentries:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'editentries:62aced0c-cee2-4490-89bf-45f06390f5fd'
+  - 'editentries:809e57fb-b7b0-4562-838e-7a9634ed4050'
+  - 'editentries:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'editentries:887c3c6e-b5fc-462c-83b6-63bb1fa465ef'
+  - 'editentries:a2b9d81e-e4fd-44c7-99f8-31a419d6cfd4'
+  - 'editentries:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'editentries:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - 'editglobalset:5e12a77e-ddc3-4c4b-8ecc-21648ccc4764' # Mailing List
+  - 'editglobalset:6992a4d2-1a7b-45c8-bb95-30cb9906afbe' # Footer Content
+  - 'editglobalset:72841e48-5f6f-4ad5-a09d-489a5a703e1b' # Messages
+  - 'editglobalset:e8ba5c9e-87ee-476f-8de7-0cd23888313f' # Donation Widget
+  - 'editglobalset:f88b8298-1bca-4db9-8785-2c55ff7f286f' # Shop
+  - 'editimagesinvolume:1948a874-8ce9-4592-a201-3448fe68e4c7' # Product Images
+  - 'editimagesinvolume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+  - 'editimagesinvolume:4c698e15-4753-437f-b292-60fb0a5e673f' # Resources
+  - 'editpeerentries:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'editpeerentries:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'editpeerentries:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'editpeerentries:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'editpeerentries:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - 'editpeerentrydrafts:01b61775-b707-483e-9dbc-8eb711a4ff66'
+  - 'editpeerentrydrafts:2adc1ead-6feb-43cf-804c-eb32b4bbcf7c'
+  - 'editpeerentrydrafts:2cc667a3-6f4c-49b6-ac8e-a12183ed4be8'
+  - 'editpeerentrydrafts:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'editpeerentrydrafts:52701c8c-c37c-4982-9eb2-129960f0f7f3'
+  - 'editpeerentrydrafts:5f0dc449-94f1-4732-a84c-5795b8d3bb7b'
+  - 'editpeerentrydrafts:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'editpeerentrydrafts:62aced0c-cee2-4490-89bf-45f06390f5fd'
+  - 'editpeerentrydrafts:809e57fb-b7b0-4562-838e-7a9634ed4050'
+  - 'editpeerentrydrafts:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'editpeerentrydrafts:887c3c6e-b5fc-462c-83b6-63bb1fa465ef'
+  - 'editpeerentrydrafts:a2b9d81e-e4fd-44c7-99f8-31a419d6cfd4'
+  - 'editpeerentrydrafts:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'editpeerentrydrafts:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - editusers
+  - manageredirects
+  - managesitemap
+  - moderateusers
+  - 'publishentries:01b61775-b707-483e-9dbc-8eb711a4ff66'
+  - 'publishentries:2adc1ead-6feb-43cf-804c-eb32b4bbcf7c'
+  - 'publishentries:2cc667a3-6f4c-49b6-ac8e-a12183ed4be8'
+  - 'publishentries:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'publishentries:52701c8c-c37c-4982-9eb2-129960f0f7f3'
+  - 'publishentries:5f0dc449-94f1-4732-a84c-5795b8d3bb7b'
+  - 'publishentries:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'publishentries:62aced0c-cee2-4490-89bf-45f06390f5fd'
+  - 'publishentries:809e57fb-b7b0-4562-838e-7a9634ed4050'
+  - 'publishentries:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'publishentries:887c3c6e-b5fc-462c-83b6-63bb1fa465ef'
+  - 'publishentries:a2b9d81e-e4fd-44c7-99f8-31a419d6cfd4'
+  - 'publishentries:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'publishentries:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - 'publishpeerentries:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'publishpeerentries:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'publishpeerentries:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'publishpeerentries:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'publishpeerentries:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - 'publishpeerentrydrafts:01b61775-b707-483e-9dbc-8eb711a4ff66'
+  - 'publishpeerentrydrafts:2adc1ead-6feb-43cf-804c-eb32b4bbcf7c'
+  - 'publishpeerentrydrafts:2cc667a3-6f4c-49b6-ac8e-a12183ed4be8'
+  - 'publishpeerentrydrafts:460ed928-09d4-4944-bae7-2b64162b9aa7'
+  - 'publishpeerentrydrafts:52701c8c-c37c-4982-9eb2-129960f0f7f3'
+  - 'publishpeerentrydrafts:5f0dc449-94f1-4732-a84c-5795b8d3bb7b'
+  - 'publishpeerentrydrafts:6083830d-a37d-4f5a-af14-a6d47a86770f'
+  - 'publishpeerentrydrafts:62aced0c-cee2-4490-89bf-45f06390f5fd'
+  - 'publishpeerentrydrafts:809e57fb-b7b0-4562-838e-7a9634ed4050'
+  - 'publishpeerentrydrafts:83dc0e48-e5f6-48fa-9a63-b1ae3a7d43e8'
+  - 'publishpeerentrydrafts:887c3c6e-b5fc-462c-83b6-63bb1fa465ef'
+  - 'publishpeerentrydrafts:a2b9d81e-e4fd-44c7-99f8-31a419d6cfd4'
+  - 'publishpeerentrydrafts:a521ebc5-5a36-4b86-b6d8-41d282a1d836'
+  - 'publishpeerentrydrafts:edb53a64-8cb7-4e85-a2b4-c12ec0766a5e'
+  - registerusers
+  - 'saveassetinvolume:1948a874-8ce9-4592-a201-3448fe68e4c7' # Product Images
+  - 'saveassetinvolume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+  - 'saveassetinvolume:4c698e15-4753-437f-b292-60fb0a5e673f' # Resources
+  - 'utility:asset-indexes'
+  - 'utility:clear-caches'
+  - 'utility:db-backup'
+  - 'utility:deprecation-errors'
+  - 'utility:migrations'
+  - 'utility:php-info'
+  - 'utility:search-indexes'
+  - 'utility:system-messages'
+  - 'utility:system-report'
+  - 'utility:updates'
+  - 'viewvolume:1948a874-8ce9-4592-a201-3448fe68e4c7' # Product Images
+  - 'viewvolume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+  - 'viewvolume:4c698e15-4753-437f-b292-60fb0a5e673f' # Resources

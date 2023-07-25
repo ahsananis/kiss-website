@@ -1,0 +1,19 @@
+.pagination-link {
+    @apply .w-full;
+    @apply .inline-flex;
+    @apply .items-center;
+    max-width: 25rem;
+
+    & svg {
+        @apply .transition;
+        transition-property: color, transform;
+    }
+
+    &-left:hover svg {
+        transform: translateX(-10px);
+    }
+
+    &-right:hover svg {
+        transform: translateX(10px);
+    }
+}

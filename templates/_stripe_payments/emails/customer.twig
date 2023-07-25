@@ -1,0 +1,5 @@
+{% if order.getPaymentForm().handle in craft.app.config.general.donationFormHandles %}
+    {% include '_stripe_payments/emails/customer_donation' %}
+{% else %}
+    {% include '_stripe_payments/emails/customer_shop' %}
+{% endif %}

@@ -1,0 +1,18 @@
+contentColumnType: text
+fieldGroup: 0d9e1fd2-bb34-4b71-8000-a224b2d7c850 # Contact
+handle: emailAddress
+instructions: ''
+name: 'Email Address'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

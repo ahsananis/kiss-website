@@ -1,0 +1,12 @@
+{% extends "_layouts/donate" %}
+{% set seo = craft.seo.custom('My donation') %}
+
+{# @todo: Get from product? #}
+{% block heading %}One-time donation{% endblock %}
+{% block subheading %}{% endblock %}
+
+{% block form %}
+    {{ craft.enupalStripe.paymentForm('oneTimeDonation', {
+        loadAssets: false,
+    }) }}
+{% endblock %}

@@ -1,0 +1,18 @@
+contentColumnType: text
+fieldGroup: 8fe4c8ab-0c68-4035-a563-f9455ede1e8f # Messages
+handle: mailingListPopupCtaMessage
+instructions: ''
+name: 'Mailing List Popup CTA Message'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: '1'
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

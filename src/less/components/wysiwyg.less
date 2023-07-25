@@ -1,0 +1,38 @@
+.wysiwyg {
+    h1, h2, h3, h4, h5, h6 {
+        @apply .mb-4;
+        @apply .text-3xl;
+        @apply .font-semibold;
+        @apply .font-marujo-fino-sans;
+        @apply .leading-tight;
+        @apply .tracking-wide;
+    }
+
+    p {
+        @apply .mb-4;
+    }
+
+    ol,
+    ul {
+        @apply .my-4;
+        @apply .pl-10;
+
+        li {
+            @apply .mb-1;
+        }
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    ul {
+        list-style-type: disc;
+    }
+
+    a {
+        @apply .font-semibold;
+        @apply .border-b-2;
+        @apply .border-yellow;
+    }
+}

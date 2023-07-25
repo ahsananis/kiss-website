@@ -1,0 +1,24 @@
+<div data-vue="mailing-list-form">
+    <mailing-list-form inline-template>
+        <transition name="lift-and-fade" mode="out-in">
+            <form v-if="!success" class="inline-block max-w-full w-160" v-on:submit.prevent="subscribe">
+                <div class="input-group">
+                    <input class="form-control text-grey-60 border-grey-20" type="email" name="email" v-model="form.email" placeholder="{{ 'Enter your email address'|t }}" required>
+                    <select class="form-control text-grey-60 border-grey-20" v-model="form.relationship" :class="{ 'placeholder': !form.relationship }" required>
+                        <option value="" disabled selected>How do you know KiSS?</option>
+                        {% for item in mailingList.relationshipToKiss %}
+                            <option>{{ item.relationship }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-grey-20" :class="{ 'is-working': working }" type="submit">{{ 'Subscribe'|t }}</button>
+                    </div>
+                </div>
+                <p v-if="error" v-text="error" class="invalid-feedback block text-left"></p>
+            </form>
+            <div v-else>
+                <p class="text-grey-60">{{ footerContent.mailingListConfirmationMessage }}</p>
+            </div>
+        </transition>
+    </mailing-list-form>
+</div>

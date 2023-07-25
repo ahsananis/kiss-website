@@ -1,0 +1,11 @@
+.StripeElement--focus {
+    &:extend(.form-control:focus);
+}
+
+.StripeElement--invalid {
+    &:extend(.form-control.is-invalid);
+
+    ~ .invalid-feedback {
+        &:extend(.form-control.is-invalid ~ .invalid-feedback);
+    }
+}

@@ -1,0 +1,23 @@
+enableVersioning: true
+handle: pageNotFound
+name: 'Page Not Found'
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  16d8c199-da90-4e47-84d1-fd46b342651b: # Kiddies Support Scheme
+    enabledByDefault: true
+    hasUrls: true
+    template: 404.twig
+    uriFormat: '404'
+type: single

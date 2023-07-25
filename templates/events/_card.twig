@@ -1,0 +1,35 @@
+<div class="card card-faux-link w-full {% if isFeaturedEntry %}md:flex-row{% endif %} mb-6 sm:mb-10">
+    {% set image = entry.featuredImage.one() %}
+    {% if image %}
+        {% if isFeaturedEntry %}
+            <img class="w-full rounded-t md:w-auto md:rounded-t-none md:rounded-l md:w-2/3 object-cover" src="{{ image.getUrl({ width: 640, height: 320 }) }}" alt="{{ image.title }}" style="height: 320px;">
+        {% else %}
+            <img class="card-img-top object-cover" src="{{ image.getUrl({ width: 460, height: 288 }) }}" alt="{{ image.title }}" style="height: 288px;">
+        {% endif %}
+    {% endif %}
+
+    <div class="card-body flex flex-col flex-1">
+        <h2 class="card-title mb-2">
+            {% if showIcons is defined and showIcons %}
+                {% include "_includes/icons/calander.svg" with { class: "w-6 h-6 text-yellow fill-current" } only %}
+            {% endif %}
+            {{ entry.title }}
+        </h2>
+
+        <p class="mb-4 text-sm text-grey-60">
+            {% if not entry.date and not entry.datePlaceholder %}
+                Date coming soon
+            {% elseif entry.datePlaceholder %}
+                {{ entry.datePlaceholder }}
+            {% else %}
+                Date: {{ entry.date|date(entry.date|date('Hi') == '0000' ? 'F j, Y' : 'F j, Y \\a\\t g:ia') }}
+            {% endif %}
+        </p>
+        
+        <div class="mb-auto wysiwyg text-grey-60">
+            {{ entry.shortDescription }}
+        </div>
+    </div>
+
+    <a href="{{ entry.url }}" class="card-faux-link-overlay" tabindex="-1">{{ entry.title }}</a>
+</div>

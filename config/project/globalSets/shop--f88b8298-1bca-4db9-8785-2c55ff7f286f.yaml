@@ -1,0 +1,27 @@
+fieldLayouts:
+  87f215b4-64e6-491f-8ac8-574b5e1fcb26:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: b7d4fbfe-33fd-41c9-be0d-b7f124cbda53 # Order Complete Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: bc9e5439-74b6-436d-a2e5-1db388f9e8ae # Order Failed Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: shop
+name: Shop

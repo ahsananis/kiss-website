@@ -1,0 +1,392 @@
+{% set giftAidMultiplyer = craft.app.config.general.giftAidMultiplyer %}
+
+{# @todo: find these values by `type` key rather than the array index #}
+{% if paymentForm.handle == 'sponsorAChild' %}
+    {% set kissSuggestedAmounts = craft.app.config.general.sponsorAChildTemplate %}
+{% elseif paymentForm.handle == 'sponsorTheCommunity' %}
+    {% set kissSuggestedAmounts = craft.app.config.general.sponsorTheCommunityTemplate %}
+{% elseif paymentForm.handle == 'oneTimeDonation' %}
+    {% set kissSuggestedAmounts = craft.app.config.general.donationTemplates[1].values %}
+{% else %}
+    {% set kissSuggestedAmounts = craft.app.config.general.donationTemplates[0].values %}
+{% endif %}
+
+{%- set redirectUri = paymentForm.returnUrl -%}
+{%- do craft.enupalStripe.addVariables(_context) -%}
+{% set formClass = paymentForm.enableCheckout ? "enupal-stripe-form" : "enupal-stripe-form-elements" %}
+{% set queryStringAmount = craft.app.request.getParam('amount') %}
+
+<form class="{{ formClass }}" id="enupal-stripe-{{ paymentForm.id }}" method="POST">
+    {{ csrfInput() }}
+    <input type="hidden" aria-hidden="true" name="action" value="enupal-stripe/stripe/save-order">
+
+    {%- if redirectUri is not empty %}
+        {% if redirectUri|slice(0, 1)|lower == '?' %}
+            {%- set redirectUri = craft.request.getUrl()~paymentForm.returnUrl %}
+        {% endif %}
+
+        <input type="hidden" aria-hidden="true" name="redirect" value="{{ redirectUri|hash }}">
+    {% endif %}
+
+    <input type="hidden" aria-hidden="true" name="enableCheckout" value="{{ paymentForm.enableCheckout }}">
+
+    {% namespace 'enupalStripe' %}
+        <input type="hidden" name="token" value />
+        {% if paymentForm.enableSubscriptions %}
+            <input type="hidden" name="planId" value>
+        {% endif %}
+        <input type="hidden" name="email" value />
+        <input type="hidden" name="formId" value="{{ paymentForm.id }}" />
+        <input type="hidden" name="amount" value />
+        <input type="hidden" name="quantity" value="{{ options.quantity ?? 1 }}" />
+        <input type="hidden" name="taxAmount" value>
+        <input type="hidden" name="amountBeforeTax" value>
+        <input type="hidden" name="stripeData" value="{{ paymentForm.getPublicData(options) }}">
+        <input type="hidden" name="testMode" value>
+        {% if paymentForm.enableShippingAddress and paymentForm.enableCheckout  %}
+            <input type="hidden" name="address[name]" value />
+            <input type="hidden" name="address[country]" value />
+            <input type="hidden" name="address[zip]" value />
+            <input type="hidden" name="address[state]" value />
+            <input type="hidden" name="address[line1]" value />
+            <input type="hidden" name="address[line2]" value />
+            <input type="hidden" name="address[city]" value />
+        {% endif %}
+        {% if paymentForm.enableBillingAddress and paymentForm.enableCheckout  %}
+            <input type="hidden" name="billingAddress[name]" value />
+            <input type="hidden" name="billingAddress[country]" value />
+            <input type="hidden" name="billingAddress[zip]" value />
+            <input type="hidden" name="billingAddress[state]" value />
+            <input type="hidden" name="billingAddress[line1]" value />
+            <input type="hidden" name="billingAddress[line2]" value />
+            <input type="hidden" name="billingAddress[city]" value />
+        {% endif %}
+
+        {% if not paymentForm.enableSubscriptions %}
+            {# One time payment logic #}
+            {% if paymentForm.amountType == 1 %}
+                {% set customLabel = paymentForm.getCustomLabel() %}
+                {% set currencySymbol = paymentForm.getCurrencySymbol() %}
+                {% set customId = 'customAmount-'~paymentForm.id %}
+                {% set recurringId = 'recurringToggle-'~paymentForm.id %}
+                {# English only #}
+                {% set interval = paymentForm.recurringPaymentType ~ 'ly'  %}
+                {% set recurringLabel = 'Make this a '~interval~' payment' %}
+                {% set minimumAmount = queryStringAmount ? "%.2f"|format(queryStringAmount) : paymentForm.amount ? "%.2f"|format(paymentForm.amount) : paymentForm.minimumAmount ? "%.2f"|format(paymentForm.minimumAmount) : '' %}
+                {# DRY #}
+                <div class="mb-12">
+                    <h2 class="mb-2 text-2xl font-semibold font-marujo-fino-sans tracking-wide">My donation</h2>
+
+                    <label for="{{ customId }}">{{ customLabel|raw|t }}</label>
+
+                    <div class="sm:flex sm:justify-between">
+
+                        <div class="flex mb-4 sm:mb-0">
+                            {% for kissAmount in kissSuggestedAmounts %}
+                                <div class="flex-1 sm:flex-none custom-radio">
+                                    <input type="radio" id="kiss-suggested-amount-{{ kissAmount }}" value="{{ kissAmount }}" name="kissAmount" data-kiss-amount="preset" {% if minimumAmount == kissAmount %}checked{% endif %}>
+                                    <label for="kiss-suggested-amount-{{ kissAmount }}" class="w-full sm:w-auto" style="min-width: 5rem;">{{ currencySymbol }}{{ '%.0f'|format(kissAmount) }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="block mb-0 mr-2 text-sm" for="{{ customId }}">Other amount</label>
+
+                            <div class="flex flex-1 px-4 py-2 bg-white border-2 border-yellow rounded-full">
+                                <span class="mr-1">{{ currencySymbol }}</span>
+                                <input class="appearance-none w-full focus:outline-none" type="number" id="{{ customId }}" name="customAmount" min="{{ "%.2f"|format(paymentForm.minimumAmount) }}" value="{{ minimumAmount }}" step="1" data-kiss-amount="custom">
+                            </div>
+                        </div>
+                    </div>
+
+                    {# THIS IS THE NEW THING! #}
+                    {# {% if paymentForm.enableRecurringPayment %} #}
+                        {# <div class="form-group"> #}
+                            {# <div class="enupal-input-icon"> #}
+                                {# <input type="checkbox" id="{{ recurringId }}" name="recurringToggle"> #}
+
+                                {# <label for="{{ recurringId }}"> #}
+                                    {# {{- recurringLabel|t -}} #}
+                                {# </label> #}
+                            {# </div> #}
+                        {# </div> #}
+                    {# {% endif %} #}
+                </div>
+
+                {# {% if paymentForm.enableRecurringPayment %} #}
+                    {# <div class="form-group"> #}
+                        {# <div class="enupal-input-icon"> #}
+                            {# <input type="checkbox" class="form-control" id="{{ recurringId }}" name="recurringToggle"> #}
+
+                            {# <label for="{{ recurringId }}"> #}
+                                {# {{- recurringLabel|t -}} #}
+                            {# </label> #}
+                        {# </div> #}
+                    {# </div> #}
+                {# {% endif %} #}
+            {% endif %}
+        {% else %}
+            {# BLAH START #}
+
+            {# Susbscription Pay logic #}
+            {% if paymentForm.subscriptionType == 0 %}
+                {# Single Plan #}
+                {% if paymentForm.enableCustomPlanAmount %}
+                    {% set currencySymbol = paymentForm.getCurrencySymbol() %}
+                    {% set customId = 'customSingleAmount-'~paymentForm.id %}
+                    {% set minimumAmount = queryStringAmount ? "%.2f"|format(queryStringAmount) : paymentForm.customPlanDefaultAmount ? "%.2f"|format(paymentForm.customPlanDefaultAmount) : '' %}
+                    {# DRY #}
+                    <div class="mb-12">
+                        <h2 class="mb-2 text-2xl font-semibold font-marujo-fino-sans tracking-wide">My donation</h2>
+
+                        {# <label for="{{ customId }}">{ customLabel|raw|t }}</label> #}
+                        <label for="{{ customId }}">{{ 'I am making a monthly donation of' }}</label>
+
+                        <div class="sm:flex sm:justify-between">
+
+                            <div class="flex mb-4 sm:mb-0">
+                                {% for kissAmount in kissSuggestedAmounts %}
+                                    <div class="flex-1 sm:flex-none custom-radio">
+                                        <input type="radio" id="kiss-suggested-amount-{{ kissAmount }}" value="{{ kissAmount }}" name="kissAmount" data-kiss-amount="preset" {% if minimumAmount == kissAmount %}checked{% endif %}>
+                                        <label for="kiss-suggested-amount-{{ kissAmount }}" class="w-full sm:w-auto" style="min-width: 5rem;">{{ currencySymbol }}{{ '%.0f'|format(kissAmount) }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="flex items-center">
+                                <label class="block mb-0 mr-2 text-sm" for="{{ customId }}">Other amount</label>
+
+                                <div class="flex flex-1 px-4 py-2 bg-white border-2 border-yellow rounded-full">
+                                    <span class="mr-1">{{ currencySymbol }}</span>
+                                    <input class="appearance-none w-full focus:outline-none" type="number" id="{{ customId }}" name="customPlanAmount" min="{{ "%.2f"|format(paymentForm.customPlanMinimumAmount) }}" value="{{ minimumAmount }}" step="1" data-kiss-amount="custom">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    {% if paymentForm.handle != 'sponsorAChild' %}
+                        {% exit 404 %}
+                    {% endif %}
+
+                    {% set currencySymbol = '£' %}
+                    {% set minimumAmount = 6 %}
+
+                    <div class="mb-12">
+                        <h2 class="mb-2 text-2xl font-semibold font-marujo-fino-sans tracking-wide">My donation</h2>
+                        <label for="enupalStripe-customSingleAmount-253">I am making a monthly donation of &pound;6.00 to Sponsor a Child</label>
+                    </div>
+                {% endif %}
+            {% else %}
+                {# User select Plan #}
+                {# {% if paymentForm.enupalMultiplePlans|length %} #}
+                    {# <div class="form-group"> #}
+                        {# <section class="tab"> #}
+                            {# <div class="heading"> #}
+                                {# <label for="{{ paymentForm.selectPlanLabel }}"> #}
+                                    {# {{- paymentForm.selectPlanLabel|raw|t -}} #}
+                                {# </label> #}
+                            {# </div> #}
+                            {# <div class="input"> #}
+                                {# {%- set input = craft.enupalStripe.displayMultiSelect(paymentForm)  %} #}
+                                {# {{ input|raw }} #}
+                            {# </div> #}
+                        {# </section> #}
+                    {# </div> #}
+                {# {% endif %} #}
+            {% endif %}
+
+            {# BLAH END #}
+        {% endif %}
+
+        <div class="mb-12">
+            {% if not paymentForm.enableSubscriptions %}
+                <p class="text-lg">To make a regular donation instead, <a class="text-blue" href="{{ url('donate/monthly') }}">click here</a>.</p>
+            {% endif %}
+        </div>
+
+        {% for block in paymentForm.enupalStripeBasicFields.all() %}
+            <div class="mb-12" {% if block.fieldHandle == 'giftAid' %}data-gift-aid="opt-in" data-gift-aid-multiplyer="{{ giftAidMultiplyer }}" data-currency-symbol="{{ currencySymbol }}"{% endif %}>
+                {% if block.type != 'hidden' %}
+                    <label for="{{ block.label }}" class="text-2xl font-semibold font-marujo-fino-sans tracking-wide {% if block.fieldHandle == 'giftAid' %}flex items-end justify-between{% endif %}">
+                        {{- block.label|raw|t -}}
+
+                        {% if block.fieldHandle == 'giftAid' %}
+                            <img src="{{ siteUrl('assets/img/giftaid.png') }}" srcset="{{ siteUrl('assets/img/giftaid.png') }} 1x, {{ siteUrl('assets/img/giftaid@2x.png') }} 2x" alt="Gift Aid logo">
+                        {% endif %}
+                    </label>
+                {% endif %}
+
+                {%- set input = craft.enupalStripe.displayField(paymentForm, block)  %}
+
+                {% if block.fieldHandle != 'giftAid' %}
+                    {{ input|raw }}
+                {% endif %}
+
+                {% if block.fieldHandle == 'giftAid' %}
+                    <p class="my-6 text-xl">Please turn every <span class="text-blue" data-gift-aid="donation">{{ currencySymbol }}{{ minimumAmount|number_format(2)|replace({ '.00': '' }) }}</span> you donate into <span class="text-blue" data-gift-aid="transform">{{ currencySymbol }}{{ (minimumAmount * giftAidMultiplyer)|number_format(2)|replace({ '.00': '' }) }}</span> at no extra cost to you</p>
+
+                    <div class="mb-6 p-6 bg-blue-lightest rounded">
+                        {{ input|raw }}
+                    </div>
+
+                    <p class="text-grey-60 leading-tight">
+                        <small>
+                            {{ messages.giftAidLegalMessage }}
+                        </small>
+                    </p>
+                {% endif %}
+                
+                {% if block.fieldHandle == 'sourceType' %}
+                    <p class="mt-6">We're unable to claim Gift Aid on collections or other group donations</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {# ENDS FIELD LOGIC #}
+    {% endnamespace %}
+
+    {# Stripe Elements logic #}
+    {% if not paymentForm.enableCheckout %}
+        {# Address #}
+        {% set hideShipping = false %}
+        {% if paymentForm.enableShippingAddress and paymentForm.enableBillingAddress %}
+            {% set hideShipping = true %}
+        {% endif %}
+
+        <div class="mb-12">
+            <h2 class="mb-2 text-2xl font-semibold font-marujo-fino-sans tracking-wide">Your details</h2>
+
+            {% if paymentForm.enableBillingAddress  %}
+                {%- set address = craft.enupalStripe.displayAddress(paymentForm, 'billingAddress')  %}
+                <div id="billingAddressContainer-{{ paymentForm.id }}">
+                    {{ address|raw }}
+                </div>
+            {% endif %}
+
+            {% if paymentForm.enableShippingAddress  %}
+                {%- set address = craft.enupalStripe.displayAddress(paymentForm)  %}
+                <div id="shippingAddressContainer-{{ paymentForm.id }}" class="shippingAddressContainer {% if hideShipping %} hidden {% endif %}">
+                    {{ address|raw }}
+                </div>
+            {% endif %}
+
+            {% if paymentForm.enableShippingAddress and paymentForm.enableBillingAddress %}
+                {% namespace 'enupalStripe' %}
+                    <div class="mb-4">
+                        <input type="checkbox" name="sameAddressToggle" id="sameAddressToggle-{{ paymentForm.id }}" class="same-address-toggle" checked="checked">
+                        <label for="same-address-toggle-{{ paymentForm.id }}">{{ "Same billing & shipping info"|t }}</label>
+                    </div>
+                {% endnamespace %}
+            {% endif %}
+            {# End address #}
+
+            {# Payment method select #}
+            <input type="hidden" name='paymentType' value="{{ paymentForm.getDefaultPaymentMethod() }}">
+            {% if paymentTypeIds|length > 1 %}
+                {% set paymentOptions = craft.enupalStripe.getPaymentTypesAsOptions(paymentForm.paymentType) %}
+                <div class="form-group">
+                    <div class="heading">
+                        <label for="paymentMethod-{{ paymentForm.id }}">
+                            {{ "Select a payment method:"|t -}}
+                        </label>
+                    </div>
+                    <div class="input">
+                        <select
+                            name="paymentMethod"
+                            id="paymentMethod-{{ paymentForm.id }}"
+                            class="paymentMethod"
+                            required aria-required="true"
+                        >
+                            {%- for key, option in paymentOptions -%}
+                                <option value="{{ option.value }}"
+                                >{{ option.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            {% endif %}
+            {# End payment method select #}
+
+            {% set currentEmail = settings.currentUserEmail ? currentUser.email ?? '' : '' %}
+            <div class="mb-4">
+                <label for="email-{{ paymentForm.id }}">{{ "Email Address"|t }} *</label>
+                <input class="form-control" id="email-{{ paymentForm.id }}" type="email" name="stripeElementEmail" value="{{ currentEmail }}" required>
+            </div>
+        </div>
+
+        <div class="mb-12">
+            <h2 class="mb-2 text-2xl font-semibold font-marujo-fino-sans tracking-wide">Payment details</h2>
+            {% for paymentTypeId in paymentTypeIds %}
+                {# Credit Card #}
+                {% set isHidden = paymentTypeIds|length > 1 ? true : false %}
+                {% if paymentTypeId == 1 %}
+                    <div class="mb-4 cc-wrapper {% if isHidden %}hidden{% endif %}">
+                        <label for="card-element-{{ paymentForm.id }}">{{ "Credit or debit card"|t }} *</label>
+                        <div id="card-element-{{ paymentForm.id }}" class="form-control"></div>
+
+                        <div class="invalid-feedback" id="card-errors-{{ paymentForm.id }}" role="alert"></div>
+                    </div>
+                {# IDeal #}
+                {% elseif paymentTypeId == 2 %}
+                    <input type="hidden" name='idealBank' value>
+                    <div class="form-row inline ideal-wrapper {% if isHidden %}hidden{% endif %}">
+                        <div class="form-row">
+                            <label for="ideal-bank-element-{{ paymentForm.id }}">
+                                {{ "iDEAL Bank"|t }}
+                            </label>
+                            <div id="ideal-bank-element-{{ paymentForm.id }}">
+                            </div>
+                        </div>
+                        {# Used to display form errors.#}
+                        <div id="ideal-error-message-{{ paymentForm.id }}" role="alert"></div>
+                    </div>
+                {# SOFORT #}
+                {% elseif paymentTypeId == 3 %}
+                    {% set sofortCountries = craft.enupalStripe.getSofortCountriesAsOptions() %}
+                    <div class="form-row inline sofort-wrapper {% if isHidden %}hidden{% endif %}">
+                        <div class="form-group">
+                            <div class="heading">
+                                <label for="sofortCountry-{{ paymentForm.id }}">
+                                    {{ "Select a country:"|t -}}
+                                </label>
+                            </div>
+                            <div class="input">
+                                <select
+                                        name="sofortCountry"
+                                        id="sofortCountry-{{ paymentForm.id }}"
+                                        class="sofortCountry"
+                                        required aria-required="true"
+                                >
+                                    {%- for key, option in sofortCountries -%}
+                                        <option value="{{ option.value }}"
+                                        >{{ option.label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {# End elements logic #}
+
+    <div class="mb-12">
+        {% set buttonId = "stripe-payments-submit-button-" ~ paymentForm.id %}
+        {% if settings.enableTaxes and settings.tax and settings.displayTaxLabel %}
+            <p class="total-tax-amount">
+                <label name="tax-amount-label" for="{{ buttonId }}"></label>
+            </p>
+        {% endif %}
+        
+        <div class="lg:flex lg:items-center">
+            <button id="{{ buttonId }}" class="mr-4 mb-8 lg:mb-0 btn btn-yellow {{ paymentForm.buttonClass }}"><span>{{ paymentForm.getPaymentFormText() }}</span></button>
+
+            <p class="text-sm text-grey-60">
+                {% include "_includes/icons/lock_solid.svg" with { class: 'w-3 h-3 mr-1 align-baseline' } only %}
+                Donations securely processed by <a class="underline hover:text-grey-80" href="https://stripe.com" target="_blank" rel="noreferrer noopener">Stripe</a>.
+            </p>
+        </div>
+    </div>
+
+</form>

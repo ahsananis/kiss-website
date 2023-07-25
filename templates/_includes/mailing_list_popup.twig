@@ -1,0 +1,46 @@
+<div data-vue="mailing-list-popup">
+    <mailing-list-popup :offset="500" inline-template v-cloak>
+        <transition
+            enter-active-class="transition-all transition-medium ease-out-quad"
+            leave-active-class="transition-all transition-medium ease-in-quad"
+            enter-class="translate-y-full"
+            enter-to-class="translate-y-0"
+            leave-class="translate-y-0"
+            leave-to-class="translate-y-full"
+            appear
+        >
+            <form v-if="show" class="fixed pin-r pin-b pin-l z-40" v-on:submit.prevent="subscribe">
+                <div class="max-w-lg mx-auto">
+                    <div class="p-6 bg-blue-lightest lg:rounded-t">
+                        <div class="flex items-start justify-between">
+                            <h4 class="mb-4 font-marujo-fino-sans font-semibold leading-tight tracking-wide uppercase text-xl">Stay up to date</h4>
+                            <button @click="dismiss" type="button" class="ml-4 focus:outline-none">{% include "_includes/icons/times.svg" with { class: 'w-6 h-6' } only %}</button>
+                        </div>
+
+                        <p class="mb-4">{{ mailingList.mailingListPopupCtaMessage|nl2br }}</p>
+
+                        <div class="flex">
+                            <div class="flex flex-wrap -mx-2 -mb-2 flex-1">
+                                <div class="w-full sm:w-auto sm:flex-1 mb-2 px-2">
+                                    <input class="form-control" type="text" placeholder="Enter your email address" v-model="form.email" required>
+                                    <p v-if="error" v-text="error" class="invalid-feedback block text-left"></p>
+                                </div>
+                                <div class="w-full sm:w-auto sm:flex-1 mb-2 px-2">
+                                    <select class="form-control" :class="{ 'placeholder': !form.relationship }" v-model="form.relationship" required>
+                                        <option disabled selected value="">How do you know KiSS?</option>
+                                        {% for item in mailingList.relationshipToKiss %}
+                                            <option>{{ item.relationship }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="w-full sm:w-auto mb-2 px-2">
+                                    <button class="block sm:inline-block w-full sm:w-auto leading-tight btn bg-blue-lighter hover:bg-blue-light rounded border border-blue-lighter hover:border-blue-light" :class="{ 'is-working': working }">Subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </transition>
+    </mailing-list-popup>
+</div>

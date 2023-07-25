@@ -1,0 +1,20 @@
+{% extends "_layouts/donate" %}
+{% set seo = craft.seo.custom('Sponsor a Child') %}
+
+{# @todo: Get from product? #}
+{% block heading %}Sponsor a Child{% endblock %}
+
+{% block subheading %}
+    KiSS helps children access education; it equips them with the skills and knowledge to enable them to build
+    a better future for themselves, their families and their communities. For as little as £6 a month you can
+    sponsor a child and grant them access to the education they deserve. You will receive an introductory email
+    about your sponsored child, which will include a picture, a bit about them, where they go to school, and what
+    they enjoy. We will update you at the beginning of each new term in Uganda with pictures and information on
+    your sponsored child and how they are getting on.
+{% endblock %}
+
+{% block form %}
+    {{ craft.enupalStripe.paymentForm('sponsorAChild', {
+        loadAssets: false,
+    }) }}
+{% endblock %}

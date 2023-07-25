@@ -1,0 +1,55 @@
+field: 0144730a-aeae-482f-a689-7179dca69a41 # Hero Media
+fieldLayouts:
+  9687d43e-59d4-4fab-aee9-8a3a0b1b33bf:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 9698af52-cc21-4b21-a017-91c7ba6af9e1 # Image
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  9698af52-cc21-4b21-a017-91c7ba6af9e1: # Image
+    contentColumnType: string
+    fieldGroup: null
+    handle: image
+    instructions: ''
+    name: Image
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - image
+      defaultUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      defaultUploadLocationSubpath: ''
+      limit: '1'
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: 'Add an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:27b9a3f7-3617-403d-ae67-e35a0a790441' # Site Assets
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+handle: image
+name: Image
+sortOrder: 1

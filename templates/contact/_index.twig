@@ -1,0 +1,134 @@
+{% extends "_layouts/site" %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col sm:w-2/5">
+                <h1 class="mb-12 font-marujo-sans font-normal uppercase text-3xl md:text-5xl leading-none">{{ entry.title }}</h1>
+
+                {% if entry.emailAddress or entry.phoneNumber %}
+                    <div class="mb-8">
+                        <h4 class="mb-4 text-2xl font-semibold font-marujo-fino-sans leading-tight tracking-wide">Get in touch</h4>
+
+                        {% if entry.emailAddress %}
+                            <p{% if entry.phoneNumber %} class="mb-4"{% endif %}>
+                                Email:<br>
+                                <a class="text-grey-60 hover:text-grey-80" href="mailto:{{ entry.emailAddress }}">{{ entry.emailAddress }}</a>
+                            </p>
+                        {% endif %}
+                        
+                        {% if entry.phoneNumber %}
+                            <p>
+                                Phone:<br>
+                                <a class="text-grey-60 hover:text-grey-80" href="{{ entry.phoneNumber|replace('+44', '0044')|replace(' ', '')|replace('(0)', '') }}">{{ entry.phoneNumber }}</a>
+                            </p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="mb-8">
+                    <h4 class="mb-4 text-2xl font-semibold font-marujo-fino-sans leading-tight tracking-wide">Follow us</h4>
+
+                    <ul class="list-reset">
+                        {% if footerContent.facebookUrl %}
+                            <li>
+                                <a class="group inline-flex items-center mb-2 text-grey-60 hover:text-grey-80" href="{{ footerContent.facebookUrl }}">
+                                    {% include "_includes/icons/facebook.svg" with { 'class': 'w-4 h-4 mr-2 transition transition-color group-hover:text-facebook' } only %}
+                                    Facebook
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if footerContent.instagramUrl %}
+                            <li>
+                                <a class="group inline-flex items-center mb-2 text-grey-60 hover:text-grey-80" href="{{ footerContent.instagramUrl }}">
+                                    {% include "_includes/icons/instagram.svg" with { 'class': 'w-4 h-4 mr-2 transition transition-color group-hover:text-instagram' } only %}
+                                    Instagram
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if footerContent.twitterUrl %}
+                            <li>
+                                <a class="group inline-flex items-center mb-2 text-grey-60 hover:text-grey-80" href="{{ footerContent.twitterUrl }}">
+                                    {% include "_includes/icons/twitter.svg" with { 'class': 'w-4 h-4 mr-2 transition transition-color group-hover:text-twitter' } only %}
+                                    Twitter
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col sm:w-3/5 xl:w-1/2">
+                <div data-vue="contact-form">
+                    <contact-form inline-template>
+                        <div ref="container">
+                            <transition name="lift-and-fade" mode="out-in">
+                                <div v-if="success == false" key="form" ref="form" class="p-6 md:p-8 rounded-lg shadow-3xl border border-grey-20">
+                                    <h2 class="mb-6 text-2xl font-semibold font-marujo-fino-sans leading-tight tracking-wide">Get in touch</h2>
+
+                                    <form method="post" accept-charset="UTF-8" v-on:submit.prevent="onSubmit">
+                                        {{ csrfInput() }}
+                                        <input type="hidden" name="action" value="contact-form/send">
+                                        {{ redirectInput('contact-us/thanks') }}
+
+                                        <div class="mb-6">
+                                            <label class="required" for="name">Your name</label>
+                                            <input class="form-control" type="text" id="name" name="fromName" v-model="name" :class="{ 'is-invalid': errors['fromName'] }">
+                                            <p v-if="errors['fromName']" v-text="errors['fromName'][0]" class="invalid-feedback"></p>
+                                        </div>
+
+                                        <div class="mb-6">
+                                            <label class="required" for="email">Your email</label>
+                                            <input class="form-control" type="email" id="email" name="fromEmail" v-model="email" :class="{ 'is-invalid': errors['fromEmail'] }">
+                                            <p v-if="errors['fromEmail']" v-text="errors['fromEmail'][0]" class="invalid-feedback"></p>
+                                        </div>
+
+                                        <div class="mb-6">
+                                            <label for="phone">Your phone number</label>
+                                            <input class="form-control" type="tel" id="phone" name="message[Phone]" v-model="phone">
+                                        </div>
+
+                                        <div class="mb-6">
+                                            <label class="required" for="message">Your message</label>
+                                            <textarea class="form-control" rows="6" id="message" name="message" v-model="message" :class="{ 'is-invalid': errors['message.body'] }"></textarea>
+                                            <p v-if="errors['message.body']" v-text="errors['message.body'][0]" class="invalid-feedback"></p>
+                                        </div>
+
+                                        <div class="mb-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="message[subscribe]" id="subscribe" value="true" v-model="subscribe">
+                                                <label class="form-check-label" for="subscribe">Join our mailing list</label>
+                                            </div>
+                                        </div>
+
+                                        <div v-if="subscribe" class="mb-6">
+                                            <label class="required" for="relationship">How do you know KiSS?</label>
+                                            <select class="form-control" name="message[relationship]" id="relationship" v-model="relationship" :class="{ 'is-invalid': errors['message.relationship'] }">
+                                                <option disabled selected>Please choose an option</option>
+                                                {% for item in mailingList.relationshipToKiss %}
+                                                    <option>{{ item.relationship }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <p v-if="errors['message.relationship']" v-text="errors['message.relationship'][0]" class="invalid-feedback"></p>
+                                        </div>
+
+                                        <div>
+                                            <button class="btn btn-yellow" :class="{ 'is-working': working }" type="submit">Get in touch</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div v-else key="successMessage" class="p-6 md:p-8 rounded-lg shadow-3xl border border-grey-20">
+                                    <div class="wysiwyg">
+                                        {{ entry.contactFormThankYouMessage }}
+                                    </div>
+                                </div>
+                            </transition>
+                        </div>
+                    </contact-form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

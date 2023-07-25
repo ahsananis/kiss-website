@@ -1,0 +1,49 @@
+field: f1c57532-9589-45a9-b178-22beaea089aa # Fields
+fieldLayouts:
+  f5abfb68-1a02-4e11-9f85-b1f1d0debc94:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 6bcabe2c-7bc9-4dd0-8587-3d7ced424294 # Instructions
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  6bcabe2c-7bc9-4dd0-8587-3d7ced424294: # Instructions
+    contentColumnType: text
+    fieldGroup: null
+    handle: instructions
+    instructions: ''
+    name: Instructions
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: ''
+      cleanupHtml: true
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Simple.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: instructions
+name: Instructions
+sortOrder: 7

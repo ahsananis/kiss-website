@@ -1,0 +1,27 @@
+{% extends "_layouts/site" %}
+
+{#
+    Stripe Payments loads stripe.js at the bottom of the page which causes issues.
+    This forces a page reload so everything loads in the correct order.
+#}
+{% block head %}
+    {{ parent() }}
+    <meta name="turbolinks-visit-control" content="reload">
+{% endblock %}
+
+{% block main %}
+    <div class="container max-w-xl">
+        {% include "_includes/heading" with { entry: { title: block('heading'), body: block('subheading') } } %}
+
+        <div class="row">
+            <div class="col md:w-3/4 lg:w-2/3">
+                {% block form %}{% endblock %}
+            </div>
+
+            <div class="hidden lg:block col lg:w-1/4 md:ml-auto">
+                <img class="mb-2" src="{{ siteUrl('assets/img/students.jpg') }}" srcset="{{ siteUrl('assets/img/students.jpg') }} 1x, {{ siteUrl('assets/img/students@2x.jpg') }} 2x" width="210" height="210" alt="Students">
+                <p>{{ messages.donationPageCtaMessage|nl2br }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

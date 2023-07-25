@@ -1,0 +1,10 @@
+{% extends '_layouts/site' %}
+
+{% set entry = craft.entries.section('pageNotFound').one() %}
+{% set seo = craft.seo.custom(entry.title) %}
+
+{% block main %}
+    <div class="container">
+        {% include "_includes/heading" %}
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+contentColumnType: text
+fieldGroup: 2e6bbf3b-ca98-4dd3-8c78-1493f1e962ba # Globals
+handle: linkedinUrl
+instructions: ''
+name: 'LinkedIn Url'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: 'https://www.linkedin.com/company/acme-limited'
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

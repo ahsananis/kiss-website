@@ -1,0 +1,18 @@
+fieldLayouts:
+  b864379a-84e6-4665-b8b0-8d0eb4b884e1:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: c00edde2-1bd3-4201-8774-7f749b0053a6 # Donation Message
+            instructions: null
+            label: null
+            required: '1'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: donationWidget
+name: 'Donation Widget'

@@ -1,0 +1,79 @@
+.card {
+    @apply .flex .flex-col .bg-white .rounded .shadow;
+    transition: box-shadow .2s;
+
+    &:hover {
+        @apply .shadow-hover;
+    }
+}
+
+.card-img-top {
+    @apply .w-full .rounded-t;
+}
+
+.card-img-left {
+    @apply .rounded-l;
+}
+
+.card-body {
+    @apply .p-6;
+}
+
+.card-title {
+    @apply .mb-4;
+    @apply .text-2xl;
+    @apply .font-semibold;
+    @apply .font-marujo-fino-sans;
+    @apply .leading-tight;
+    @apply .tracking-wide;
+}
+
+/*
+```html_example
+<div class="card-faux-link">
+    <img src="" alt="This image is magically clickable" />
+    <h3><a href="#">This headline is clickable as a normal link</a></h3>
+    Lorem ipsum dolor sit amet.
+    <a href="#">another link</a>
+    <abbr title="Hoverable!">An hoverable abbreviation</abbr>
+    <video class="card-faux-link-promote">I can interact with that video</video>
+    <a href="#" class="card-faux-link-overlay" tabindex="-1">headline</a>
+</div>
+```
+*/
+
+.card-faux-link {
+    @apply .relative;
+}
+
+.card-faux-link a,
+.card-faux-link abbr[title],
+.card-faux-link-promote {
+    @apply .relative;
+    z-index: 1;
+}
+
+.card-faux-link-overlay {
+    @apply .pin;
+    @apply .overflow-hidden;
+    @apply .whitespace-no-wrap;
+    text-indent: 200%;
+}
+
+// Increased specificity so it trumps ".card-faux-link a"
+a.card-faux-link-overlay {
+    @apply .absolute;
+    z-index: 0;
+    // this line is needed as all elements have a solid black background in high contrast mode
+    @apply .opacity-0;
+
+    // Override the default user agent stylesheet so we don't incur a "Layout" each time the user taps a link.
+    &:focus {
+        @apply .outline-none;
+    }
+}
+
+// Underline cta when block is hovered
+// .card-faux-link-hover .card-faux-link-cta {
+//     text-decoration: underline;
+// }

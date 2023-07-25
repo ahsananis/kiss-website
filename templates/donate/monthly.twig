@@ -1,0 +1,12 @@
+{% extends "_layouts/donate" %}
+{% set seo = craft.seo.custom('My donation') %}
+
+{# @todo: Get from product? #}
+{% block heading %}Monthly donation{% endblock %}
+{% block subheading %}{% endblock %}
+
+{% block form %}
+    {{ craft.enupalStripe.paymentForm('monthlyDonation', {
+        loadAssets: false,
+    }) }}
+{% endblock %}

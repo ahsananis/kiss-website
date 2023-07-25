@@ -1,0 +1,20 @@
+contentColumnType: string
+fieldGroup: ecfb2b38-f04d-4397-ae88-f420b694b2f2 # Common
+handle: redirectTo
+instructions: ''
+name: 'Redirect To'
+searchable: true
+settings:
+  allowSelfRelations: false
+  limit: '1'
+  localizeRelations: false
+  selectionLabel: ''
+  showSiteMenu: true
+  source: null
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries
